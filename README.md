@@ -1,2 +1,0 @@
-# justwiselove
-A Bible Resource
