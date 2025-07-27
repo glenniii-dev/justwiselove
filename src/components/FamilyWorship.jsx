@@ -53,7 +53,7 @@ function FamilyWorship() {
   }
 
   return (
-    <div className="mt-10 bg-zinc-950 text-white w-full p-4 rounded-lg shadow-lg">
+    <div className="mt-10 bg-zinc-950 w-full text-white p-4 rounded-lg shadow-lg">
       <h2 className="text-5xl font-thin mb-5">Family Worship</h2>
       <div className="bg-zinc-950 p-4 rounded-lg">
         {currentWeek ? (
@@ -63,7 +63,7 @@ function FamilyWorship() {
             {futureWeeks.length > 0 && ( 
               <button
                 onClick={() => setShowFutureWeeks(!showFutureWeeks)}
-                className="bg-zinc-900 hover:bg-zinc-800 text-lime-600 font-bold py-2 px-50 rounded-lg mt-4 mb-6"
+                className="bg-zinc-900 hover:bg-zinc-800 px-[50px] text-lime-600 font-bold py-2 rounded-lg mt-4 mb-6"
               >
                 {showFutureWeeks ? 'HIDE' : 'SHOW'}
               </button>
