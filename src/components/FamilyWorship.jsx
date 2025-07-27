@@ -5,6 +5,7 @@ export default function FamilyWorship() {
         <h4 className="text-3xl font-thin mb-4">Week Of: DATE</h4>
         <div className="bg-zinc-900 p-4 rounded-lg">
           <p>CONTENT</p>
+          <div className=""></div>
         </div>
       </div>
     )
