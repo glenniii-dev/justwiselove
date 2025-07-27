@@ -53,9 +53,9 @@ function FamilyWorship() {
   }
 
   return (
-    <div className="mt-10 bg-zinc-950 w-full text-white p-4 rounded-lg shadow-lg">
+    <div className="mt-10 bg-zinc-950 w-full text-white pt-4 rounded-lg shadow-lg">
       <h2 className="text-5xl font-thin mb-5">Family Worship</h2>
-      <div className="bg-zinc-950 p-4 rounded-lg">
+      <div className="bg-zinc-950 rounded-lg">
         {currentWeek ? (
           <>
             {renderWeekContent(currentWeek)}
