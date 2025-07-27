@@ -11,7 +11,7 @@ const family = [
   {
     D: "January 10, 2025",
     T: "Broadcast",
-    R: "BROADCAST"
+    R: ""
   },
   {
     D: "January 17, 2025",
@@ -41,7 +41,7 @@ const family = [
   {
     D: "February 7, 2025",
     T: "Broadcast",
-    R: "BROADCAST"
+    R: ""
   },
   {
     D: "February 14, 2025",
@@ -75,7 +75,7 @@ const family = [
   {
     D: "March 7, 2025",
     T: "Broadcast",
-    R: "BROADCAST"
+    R: ""
   },
   {
     D: "March 14, 2025",
@@ -115,7 +115,7 @@ const family = [
   {
     D: "April 11, 2025",
     T: "Broadcast",
-    R: "BROADCAST"
+    R: ""
   },
   {
     D: "April 18, 2025",
@@ -154,7 +154,7 @@ const family = [
   {
     D: "May 16, 2025",
     T: "Broadcast",
-    R: "BROADCAST"
+    R: ""
   },
   {
     D: "May 23, 2025",
@@ -177,7 +177,7 @@ const family = [
   {
     D: "June 6, 2025",
     T: "Broadcast",
-    R: "BROADCAST"
+    R: ""
   },
   {
     D: "June 13, 2025",
@@ -216,7 +216,7 @@ const family = [
   {
     D: "July 11, 2025",
     T: "Broadcast",
-    R: "BROADCAST"
+    R: ""
   },
   {
     D: "July 18, 2025",
@@ -242,7 +242,7 @@ const family = [
   {
     D: "August 8, 2025",
     T: "Broadcast",
-    R: "BROADCAST"
+    R: ""
   },
   {
     D: "August 15, 2025",
@@ -268,7 +268,7 @@ const family = [
   {
     D: "September 5, 2025",
     T: "Broadcast",
-    R: "BROADCAST"
+    R: ""
   },
   {
     D: "September 12, 2025",
@@ -303,7 +303,7 @@ const family = [
   {
     D: "October 10, 2025",
     T: "Broadcast",
-    R: "BROADCAST"
+    R: ""
   },
   {
     D: "October 17, 2025",
@@ -325,7 +325,7 @@ const family = [
   {
     D: "November 7, 2025",
     T: "Broadcast",
-    R: "BROADCAST"
+    R: ""
   },
   {
     D: "November 14, 2025",
@@ -351,7 +351,7 @@ const family = [
   {
     D: "December 5, 2025",
     T: "Broadcast",
-    R: "BROADCAST"
+    R: ""
   },
   {
     D: "December 12, 2025",

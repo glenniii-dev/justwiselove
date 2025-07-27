@@ -4,16 +4,16 @@ import family from '../family.js';
 const renderWeekContent = (item) => (
   <div key={item.D} className="bg-zinc-950 p-4 rounded-lg mb-4">
     <h3 className="text-2xl font-semibold m-4">{item.D}</h3>
-    <p className="text-xl mb-3">{item.T}</p>
-    <p className="text-lg">{item.R}</p>
-    <p className="text-xl m-3">{item.T1}</p>
-    <p className="text-lg">{item.R1}</p>
-    <p className="text-xl m-3">{item.T2}</p>
-    <p className="text-lg">{item.R2}</p>
-    <p className="text-xl m-3">{item.T3}</p>
-    <p className="text-lg">{item.R3}</p>
-    <p className="text-xl m-3">{item.T4}</p>
-    <p className="text-lg">{item.R4}</p>
+    <p className="text-lime-600 text-xl mb-3">{item.T}</p>
+    <p className="font-[Roboto] text-lg">{item.R}</p>
+    <p className="text-lime-600 text-xl m-3">{item.T1}</p>
+    <p className="font-[Roboto] text-lg">{item.R1}</p>
+    <p className="text-lime-600 text-xl m-3">{item.T2}</p>
+    <p className="font-[Roboto] text-lg">{item.R2}</p>
+    <p className="text-lime-600 text-xl m-3">{item.T3}</p>
+    <p className="font-[Roboto] text-lg">{item.R3}</p>
+    <p className="text-lime-600 text-xl m-3">{item.T4}</p>
+    <p className="font-[Roboto] text-lg">{item.R4}</p>
   </div>
 );
 
@@ -55,24 +55,23 @@ function FamilyWorship() {
   return (
     <div className="mt-10 bg-zinc-950 text-white w-full p-4 rounded-lg shadow-lg">
       <h2 className="text-5xl font-thin mb-5">Family Worship</h2>
-      <div className="bg-zinc-900 p-4 rounded-lg">
+      <div className="bg-zinc-950 p-4 rounded-lg">
         {currentWeek ? (
           <>
-            <h3 className="text-3xl font-bold mb-4">This Week:</h3>
             {renderWeekContent(currentWeek)}
 
             {futureWeeks.length > 0 && ( 
               <button
                 onClick={() => setShowFutureWeeks(!showFutureWeeks)}
-                className="bg-zinc-950 hover:bg-zinc-900 text-white font-bold py-2 px-4 rounded-lg mt-4 mb-6"
+                className="bg-zinc-900 hover:bg-zinc-800 text-lime-600 font-bold py-2 px-50 rounded-lg mt-4 mb-6"
               >
-                {showFutureWeeks ? 'Hide Following Weeks' : 'Show Following Weeks'}
+                {showFutureWeeks ? 'HIDE' : 'SHOW'}
               </button>
             )}
 
             {showFutureWeeks && futureWeeks.length > 0 && (
               <div>
-                <h3 className="text-3xl font-bold mb-4 mt-6">Following Weeks</h3>
+                <h3 className="text-lime-600 text-3xl font-bold mb-4 mt-6">Next</h3>
                 {futureWeeks.map(renderWeekContent)}
               </div>
             )}
