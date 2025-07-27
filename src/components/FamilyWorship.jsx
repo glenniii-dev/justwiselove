@@ -6,6 +6,8 @@ const renderWeekContent = (item) => (
     <h3 className="text-2xl font-semibold m-4">{item.D}</h3>
     <p className="text-xl mb-3">{item.T}</p>
     <p className="text-lg">{item.R}</p>
+    <p className="text-xl m-3">{item.T1}</p>
+    <p className="text-lg">{item.R1}</p>
     <p className="text-xl m-3">{item.T2}</p>
     <p className="text-lg">{item.R2}</p>
     <p className="text-xl m-3">{item.T3}</p>
