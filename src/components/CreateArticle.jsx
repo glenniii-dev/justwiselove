@@ -123,7 +123,7 @@ const CreateArticle = () => {
   return (
     <div className="min-h-screen bg-zinc-950 p-4 sm:p-6 lg:p-8 flex flex-col items-center font-inter mt-8 rounded-lg">
       <div className="w-full max-w-4xl">
-        <h1 className="text-4xl font-bold text-lime-600 mb-8 text-center">Create New Article</h1>
+        <h1 className="text-4xl font-bold text-lime-600 mb-8 text-center">Create Article</h1>
 
         {/* Display messages to the user */}
         {message && (
@@ -140,7 +140,7 @@ const CreateArticle = () => {
         <form onSubmit={handleSubmit} className="space-y-6 bg-zinc-900 p-8 rounded-lg shadow-lg border border-lime-600">
           {/* Title Input */}
           <div>
-            <label htmlFor="title" className="block text-white text-lg font-medium mb-2">Article Title</label>
+            <label htmlFor="title" className="block text-white text-lg font-medium mb-2">Title</label>
             <input
               type="text"
               id="title"
@@ -154,7 +154,7 @@ const CreateArticle = () => {
 
           {/* Content Textarea */}
           <div>
-            <label htmlFor="content" className="block text-white text-lg font-medium mb-2">Article Content</label>
+            <label htmlFor="content" className="block text-white text-lg font-medium mb-2">Content</label>
             <textarea
               id="content"
               placeholder="Write your article content here..."
@@ -185,7 +185,7 @@ const CreateArticle = () => {
             type="submit"
             className="w-full px-6 py-3 bg-lime-600 text-white rounded-lg hover:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:ring-opacity-100 transition duration-200 ease-in-out shadow-md font-bold text-xl uppercase tracking-wider"
           >
-            Create Article
+            Create
           </button>
 
           {/* Backup and Restore Buttons */}
@@ -195,14 +195,14 @@ const CreateArticle = () => {
               onClick={handleBackup}
               className="flex-1 px-6 py-3 bg-zinc-700 text-white rounded-lg hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-600 focus:ring-opacity-100 transition duration-200 ease-in-out shadow-md font-medium"
             >
-              Backup Articles
+              Backup
             </button>
             <button
               type="button" // Important: type="button" to prevent form submission
               onClick={handleRestore}
               className="flex-1 px-6 py-3 bg-zinc-700 text-white rounded-lg hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-600 focus:ring-opacity-100 transition duration-200 ease-in-out shadow-md font-medium"
             >
-              Restore Articles
+              Restore
             </button>
           </div>
         </form>

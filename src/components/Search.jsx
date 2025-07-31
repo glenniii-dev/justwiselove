@@ -193,7 +193,7 @@ const Search = () => {
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <input
             type="text"
-            placeholder="Search by title, content, or references..."
+            placeholder="Search For Topics Or People..."
             className="p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400"
             value={query}
             onChange={handleQueryChange} // Use the new handler here
@@ -259,3 +259,6 @@ const Search = () => {
 };
 
 export default Search;
+
+
+// make reference allow enter
