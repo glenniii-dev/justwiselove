@@ -169,15 +169,15 @@ const CreateArticle = () => {
           {/* References Input */}
           <div>
             <label htmlFor="references" className="block text-white text-lg font-medium mb-2">References</label>
-            <input
-              type="text"
+            <textarea
               id="references"
               placeholder="List references (e.g., Source 1, Source 2)..."
+              rows="5"
               className="p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400"
               value={references}
               onChange={(e) => setReferences(e.target.value)}
               required
-            />
+            ></textarea>
           </div>
 
           {/* Create Article Button */}

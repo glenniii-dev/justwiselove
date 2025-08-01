@@ -185,7 +185,7 @@ const Search = () => {
   };
 
   return (
-    <div className="min-h-50 bg-zinc-950 p-4 sm:p-6 lg:p-8 flex flex-col items-center font-inter mt-8 rounded-lg">
+    <div className="min-h-50 bg-zinc-950 p-4 sm:p-6 lg:p-8 flex flex-col items-center font-inter mt-8 rounded-lg text-left">
       <div className="w-full max-w-4xl">
         <h1 className="text-4xl font-bold text-lime-600 mb-8 text-center">Search Articles</h1>
 
@@ -225,7 +225,15 @@ const Search = () => {
                   <>
                     {/* Display full content and references when expanded */}
                     <p className="text-white mb-3 leading-relaxed">{item.content}</p>
-                    <p className="text-lime-600 text-sm italic">References: {item.references}</p>
+                    <p className="font-['Roboto'] text-lime-600 italic">
+                      {item.references.split(/;|\. /).map((ref, index) => (
+                        <span key={index}>
+                          {ref}
+                          <br />
+                          <br />
+                        </span>
+                      ))}
+                    </p>
                     <button
                       onClick={handleClose}
                       className="mt-5 px-6 py-2 bg-lime-600 text-white rounded-lg hover:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:ring-opacity-100 transition duration-200 ease-in-out shadow-md font-medium"
