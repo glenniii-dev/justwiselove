@@ -218,13 +218,13 @@ const Search = () => {
             // Map through the filtered and sorted results to display each article
             displayArticles.map((item) => (
               <div key={item.title} className="bg-zinc-900 p-6 rounded-lg shadow-lg border border-lime-600">
-                <h2 className="text-2xl font-bold text-lime-600 mb-3">{item.title}</h2>
+                <h2 className="text-2xl text-lime-600 mb-3">{item.title}</h2>
 
                 {/* Conditional rendering based on whether the item is expanded or not */}
                 {expandedItemId === item.title ? (
                   <>
                     {/* Display full content and references when expanded */}
-                    <p className="text-white mb-3 leading-relaxed">{item.content}</p>
+                    <p className="font-['Roboto'] text-white mb-3 leading-relaxed">{item.content}</p>
                     <p className="font-['Roboto'] text-lime-600 italic">
                     {item.references.split(/(?<=\.’"  )|(?<=\.'"  )|(?<=\."  )|(?<=\.  )/).map((ref, index) => (
                       <span key={index}>

@@ -157,7 +157,7 @@ const CreateArticle = () => {
             <label htmlFor="content" className="block text-white text-lg font-medium mb-2">Content</label>
             <textarea
               id="content"
-              placeholder="Write your article content here..."
+              placeholder="Write article content..."
               rows="10"
               className="p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400 resize-y"
               value={content}
@@ -171,7 +171,7 @@ const CreateArticle = () => {
             <label htmlFor="references" className="block text-white text-lg font-medium mb-2">References</label>
             <textarea
               id="references"
-              placeholder="List references (e.g., Source 1, Source 2)..."
+              placeholder="List your references..."
               rows="5"
               className="p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400"
               value={references}
