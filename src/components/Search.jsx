@@ -226,13 +226,13 @@ const Search = () => {
                     {/* Display full content and references when expanded */}
                     <p className="text-white mb-3 leading-relaxed">{item.content}</p>
                     <p className="font-['Roboto'] text-lime-600 italic">
-                      {item.references.split(/;|\. /).map((ref, index) => (
-                        <span key={index}>
-                          {ref}
-                          <br />
-                          <br />
-                        </span>
-                      ))}
+                    {item.references.split(/(?<=\.’"  )|(?<=\.'"  )|(?<=\."  )|(?<=\.  )/).map((ref, index) => (
+                      <span key={index}>
+                        {ref}
+                        <br />
+                        <br />
+                      </span>
+                    ))}
                     </p>
                     <button
                       onClick={handleClose}
