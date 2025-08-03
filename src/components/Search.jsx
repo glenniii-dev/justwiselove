@@ -1,79 +1,74 @@
 import React, { useState, useEffect } from 'react';
-import search from '../search.js'; // Re-importing the original search array
+import search from '../search.js';
 
+// Search component for displaying and managing articles with search functionality
 const Search = () => {
-  // Function to combine imported articles with stored articles, ensuring uniqueness by title.
-  // This function will be used both for initial state and for updates from local storage.
+  // Combines imported articles with those stored in localStorage, ensuring no duplicates by ID
   const getCombinedArticles = () => {
     try {
+      // Retrieve raw data from localStorage under 'searchArticlesData' key
       const storedArticlesRaw = localStorage.getItem('searchArticlesData');
+      // Parse stored data into an array, or use empty array if none exists
       const storedArticles = storedArticlesRaw ? JSON.parse(storedArticlesRaw) : [];
 
-      // Start with the imported 'search' array
-      const combinedArticles = [...search];
-      // Keep track of titles to avoid duplicates (prioritizing imported articles if titles clash)
-      const articleTitles = new Set(search.map(item => item.title));
+      // Use Map to ensure unique articles by ID, prioritizing stored articles
+      const articleMap = new Map();
+      // Add default articles from imported 'search' array
+      search.forEach(item => articleMap.set(item.id, item));
+      // Overwrite with stored articles (user-created or modified)
+      storedArticles.forEach(item => articleMap.set(item.id, item));
 
-      // Add articles from local storage that are not already present in the imported list (based on title)
-      storedArticles.forEach(storedItem => {
-        if (!articleTitles.has(storedItem.title)) {
-          combinedArticles.push(storedItem);
-          articleTitles.add(storedItem.title); // Add new title to set to prevent further duplicates
-        }
-      });
-      return combinedArticles;
+      // Convert Map values to an array and return
+      return Array.from(articleMap.values());
     } catch (error) {
+      // Log error and return default articles if localStorage parsing fails
       console.error("Failed to load articles from local storage or combine with default:", error);
-      return search; // Fallback to just imported articles on error
+      return search;
     }
   };
 
-  // State to hold the articles for searching. Initially empty, populated by the "Search" button.
+  // State to store the combined list of articles
   const [searchArticles, setSearchArticles] = useState([]);
-  // State to control when results are displayed (only after the "Search" button is pressed)
+  // State to control whether search results are displayed
   const [showResults, setShowResults] = useState(false);
+  // State to store the current search query
+  const [query, setQuery] = useState('');
+  // State to track the ID of the currently expanded article (null if none)
+  const [expandedItemId, setExpandedItemId] = useState(null);
 
-  // useEffect hook to listen for changes in local storage
-  // This ensures that if another part of your application (like the CreateArticle component)
-  // updates 'searchArticlesData' in local storage, this component will react and update
-  // its internal 'searchArticles' when the 'Search' button is next pressed.
+  // useEffect to listen for changes in localStorage
   useEffect(() => {
+    // Handler for storage events (triggered when localStorage changes in another tab/window)
     const handleStorageChange = (event) => {
-      // Check if the change is for the specific key we care about
-      if (event.key === 'searchArticlesData' || event.key === null) { // event.key is null for clear() or other broad changes
-        // When storage changes, update the internal articles list
-        // This doesn't immediately show results unless the search button is pressed again.
+      // Only update if the changed key is 'searchArticlesData' or localStorage is cleared (null)
+      if (event.key === 'searchArticlesData' || event.key === null) {
         setSearchArticles(getCombinedArticles());
       }
     };
-
-    // Add event listener for 'storage' event on the window object
+    // Add event listener for 'storage' events
     window.addEventListener('storage', handleStorageChange);
-
-    // Clean up the event listener when the component unmounts to prevent memory leaks
+    // Cleanup: remove event listener when component unmounts
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, []); // The empty dependency array ensures this effect runs only once on mount and cleanup on unmount
+  }, []); // Empty dependency array ensures this runs only on mount/unmount
 
-
-  const [query, setQuery] = useState('');
-  const [expandedItemId, setExpandedItemId] = useState(null); // Stores the title of the currently expanded item
-
-  // Helper function to highlight the search query within a text snippet
+  // Highlights search query matches in text by wrapping them in styled <strong> tags
   const highlightMatch = (text, query) => {
-    if (!query) return text; // If no query, return the original text
-    // Split the text by the query (case-insensitive) to find parts to highlight
+    // Return original text if no query is provided
+    if (!query) return text;
+    // Split text into parts, using case-insensitive regex to match query
     const parts = text.split(new RegExp(`(${query})`, 'gi'));
     return (
       <span>
         {parts.map((part, index) =>
-          // If a part matches the query, highlight it; otherwise, render as normal text
+          // Highlight matching parts with lime background and white text
           part.toLowerCase() === query.toLowerCase() ? (
             <strong key={index} className="bg-lime-600 text-white rounded-sm px-0.5">
               {part}
             </strong>
           ) : (
+            // Non-matching parts are rendered as-is
             part
           )
         )}
@@ -81,122 +76,123 @@ const Search = () => {
     );
   };
 
-  // Function to filter and sort results, and extract relevant snippets for display
+  // Prepare articles to display based on search query and showResults state
   let displayArticles = [];
-  if (showResults) { // Only process and display articles if the search button has been pressed
+  if (showResults) {
     if (query) {
+      // Convert query to lowercase for case-insensitive search
       const lowerCaseQuery = query.toLowerCase();
-      displayArticles = searchArticles.map(item => { // Iterate over the articles loaded from state
+      // Map articles to include matched snippets and filter by matches
+      displayArticles = searchArticles.map(item => {
         let matchedSnippet = '';
         let matchFound = false;
-        const contextLength = 70; // Number of characters to show around the match
+        // Define context length for snippets (70 characters before/after match)
+        const contextLength = 70;
 
-        // Check for the query in the article's title
-        let index = item.title.toLowerCase().indexOf(lowerCaseQuery);
-        if (index !== -1) {
-          const start = Math.max(0, index - contextLength);
-          const end = Math.min(item.title.length, index + lowerCaseQuery.length + contextLength);
-          matchedSnippet = (start > 0 ? '...' : '') + item.title.substring(start, end) + (end < item.title.length ? '...' : '');
-          matchFound = true;
-        }
-
-        // If not found in title, check the article's content
-        if (!matchFound) {
-          index = item.content.toLowerCase().indexOf(lowerCaseQuery);
+        // Search in title, content, and references fields
+        const fieldsToSearch = [item.title, item.content, item.references];
+        for (const field of fieldsToSearch) {
+          // Find index of query in field (case-insensitive)
+          const index = field.toLowerCase().indexOf(lowerCaseQuery);
           if (index !== -1) {
+            // Extract snippet around match, adding ellipses if truncated
             const start = Math.max(0, index - contextLength);
-            const end = Math.min(item.content.length, index + lowerCaseQuery.length + contextLength);
-            matchedSnippet = (start > 0 ? '...' : '') + item.content.substring(start, end) + (end < item.content.length ? '...' : '');
+            const end = Math.min(field.length, index + lowerCaseQuery.length + contextLength);
+            matchedSnippet = (start > 0 ? '...' : '') + field.substring(start, end) + (end < field.length ? '...' : '');
             matchFound = true;
+            break; // Stop after first match
           }
         }
 
-        // If not found in content, check the article's references
-        if (!matchFound) {
-          index = item.references.toLowerCase().indexOf(lowerCaseQuery);
-          if (index !== -1) {
-            const start = Math.max(0, index - contextLength);
-            const end = Math.min(item.references.length, index + lowerCaseQuery.length + contextLength);
-            matchedSnippet = (start > 0 ? '...' : '') + item.references.substring(start, end) + (end < item.references.length ? '...' : '');
-            matchFound = true;
-          }
-        }
-
-        // Return the item with its matched snippet and a flag indicating if a match was found
+        // Return article with added matchedSnippet and matchFound properties
         return { ...item, matchedSnippet, matchFound };
-      }).filter(item => item.matchFound); // Only keep items where a match was found in any field
+      }).filter(item => item.matchFound); // Keep only articles with matches
 
-      // Sort the filtered results: first by title, then by content, then by references
+      // Sort filtered articles alphabetically by title
       displayArticles.sort((a, b) => {
-        // Primary sort by title
-        const titleCompare = a.title.localeCompare(b.title);
-        if (titleCompare !== 0) {
-          return titleCompare;
-        }
-
-        // Secondary sort by content if titles are the same
-        const contentCompare = a.content.localeCompare(b.content);
-        if (contentCompare !== 0) {
-          return contentCompare;
-        }
-
-        // Tertiary sort by references if titles and content are the same
-        return a.references.localeCompare(b.references);
+        return a.title.localeCompare(b.title);
       });
     } else {
-      // If query is empty but search button was pressed, show all articles, sorted
+      // If no query, display all articles sorted by title
       displayArticles = [...searchArticles].sort((a, b) => {
-        const titleCompare = a.title.localeCompare(b.title);
-        if (titleCompare !== 0) {
-          return titleCompare;
-        }
-        const contentCompare = a.content.localeCompare(b.content);
-        if (contentCompare !== 0) {
-          return contentCompare;
-        }
-        return a.references.localeCompare(b.references);
+        return a.title.localeCompare(b.title);
       });
     }
   }
 
-  // Function to handle expanding an article to show its full content
-  const handleExpand = (title) => {
-    setExpandedItemId(title);
+  // Expand an article by setting its ID as the expandedItemId
+  const handleExpand = (id) => {
+    setExpandedItemId(id);
   };
 
-  // Function to handle closing an expanded article
+  // Collapse the expanded article by resetting expandedItemId to null
   const handleClose = () => {
     setExpandedItemId(null);
   };
 
-  // Function to handle the "Search" button click
+  // Handle search button click: refresh articles and show results
   const handleSearchClick = () => {
-    setSearchArticles(getCombinedArticles()); // Load/sync data from local storage and imported array
-    setShowResults(true); // Set flag to display results
+    setSearchArticles(getCombinedArticles());
+    setShowResults(true);
   };
 
-  // Handle input change: if query becomes empty, hide results
+  // Update query state and hide results if query is cleared
   const handleQueryChange = (e) => {
     const newQuery = e.target.value;
     setQuery(newQuery);
     if (newQuery === '') {
-      setShowResults(false); // Hide results when query is cleared
+      setShowResults(false);
     }
   };
 
+  // Delete an article from localStorage and update state
+  const handleDelete = (articleId) => {
+    // Confirm deletion with user
+    const isConfirmed = window.confirm("Are you sure you want to permanently delete this article?");
+    if (isConfirmed) {
+      try {
+        // Retrieve and parse stored articles
+        const storedArticlesRaw = localStorage.getItem('searchArticlesData');
+        const storedArticles = storedArticlesRaw ? JSON.parse(storedArticlesRaw) : [];
+        // Filter out the article with the specified ID
+        const updatedArticles = storedArticles.filter(item => item.id !== articleId);
+        // Save updated articles to localStorage
+        localStorage.setItem('searchArticlesData', JSON.stringify(updatedArticles));
+        // Refresh article list
+        setSearchArticles(getCombinedArticles());
+        alert("Article deleted successfully.");
+      } catch (error) {
+        // Handle errors during deletion
+        console.error("Failed to delete article:", error);
+        alert("An error occurred while trying to delete the article.");
+      }
+    }
+  };
+
+  // Prepare an article for editing by saving it to localStorage
+  const handleEdit = (articleToEdit) => {
+    // Store article data in localStorage for editing on another page
+    localStorage.setItem('articleToEdit', JSON.stringify(articleToEdit));
+    // Navigation to edit page (commented out, assumes router integration)
+    // window.location.href = '/create-article';
+  };
+
+  // Render the search interface
   return (
+    // Main container with dark background, responsive padding, and centered content
     <div className="min-h-50 bg-zinc-950 p-4 sm:p-6 lg:p-8 flex flex-col items-center font-inter mt-8 rounded-lg text-left">
       <div className="w-full max-w-4xl">
+        {/* Page title */}
         <h1 className="text-4xl font-bold text-lime-600 mb-8 text-center">Search Articles</h1>
 
-        {/* Search Input and Search Button */}
+        {/* Search input and button in a responsive flex layout */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <input
             type="text"
             placeholder="Search For Topics Or People..."
             className="p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400"
             value={query}
-            onChange={handleQueryChange} // Use the new handler here
+            onChange={handleQueryChange}
           />
           <button
             onClick={handleSearchClick}
@@ -206,34 +202,62 @@ const Search = () => {
           </button>
         </div>
 
-
-        {/* Search Results display area */}
+        {/* Results section */}
         <div className="space-y-6">
-          {/* Conditional rendering for no results found or initial state */}
+          {/* Show message if no results and query is not empty */}
           {showResults && displayArticles.length === 0 && query !== '' ? (
             <p className="text-lime-600 text-center text-lg">No results found for "<span className="font-semibold">{query}</span>".</p>
           ) : showResults && displayArticles.length === 0 && query === '' ? (
+            // Show message if no articles are available
             <p className="text-lime-600 text-center text-lg">No articles available. Create some!</p>
           ) : (
-            // Map through the filtered and sorted results to display each article
+            // Render list of articles
             displayArticles.map((item) => (
-              <div key={item.title} className="bg-zinc-900 p-6 rounded-lg shadow-lg border border-lime-600">
-                <h2 className="text-2xl text-lime-600 mb-3">{item.title}</h2>
+              <div key={item.id} className="bg-zinc-900 p-6 rounded-lg shadow-lg border border-lime-600">
+                {/* Article title and edit/delete buttons (for user-created articles) */}
+                <div className="flex justify-between items-center mb-3">
+                  <h2 className="text-2xl text-lime-600">{item.title}</h2>
+                  {item.isUserCreated && (
+                    <div className="flex gap-2">
+                      {/* Edit button with SVG icon */}
+                      <button
+                        onClick={() => handleEdit(item)}
+                        className="text-lime-600 hover:text-lime-400"
+                        title="Edit Article"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                      </button>
+                      {/* Delete button with SVG icon */}
+                      <button
+                        onClick={() => handleDelete(item.id)}
+                        className="text-red-600 hover:text-red-400"
+                        title="Delete Article"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
+                </div>
 
-                {/* Conditional rendering based on whether the item is expanded or not */}
-                {expandedItemId === item.title ? (
+                {/* Expanded view: show full content and references */}
+                {expandedItemId === item.id ? (
                   <>
-                    {/* Display full content and references when expanded */}
                     <p className="font-['Roboto'] text-white mb-3 leading-relaxed">{item.content}</p>
+                    {/* Split references into separate lines with regex */}
                     <p className="font-['Roboto'] text-lime-600 italic">
-                    {item.references.split(/(?<=\.’"  )|(?<=\.'"  )|(?<=\."  )|(?<=\.  )/).map((ref, index) => (
-                      <span key={index}>
-                        {ref}
-                        <br />
-                        <br />
-                      </span>
-                    ))}
+                      {item.references.split(/(?<=\.’"  )|(?<=\.'"  )|(?<=\."  )|(?<=\.  )/).map((ref, index) => (
+                        <span key={index}>
+                          {ref}
+                          <br />
+                          <br />
+                        </span>
+                      ))}
                     </p>
+                    {/* Button to collapse article */}
                     <button
                       onClick={handleClose}
                       className="mt-5 px-6 py-2 bg-lime-600 text-white rounded-lg hover:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:ring-opacity-100 transition duration-200 ease-in-out shadow-md font-medium"
@@ -242,15 +266,15 @@ const Search = () => {
                     </button>
                   </>
                 ) : (
+                  // Collapsed view: show snippet (if any) and expand button
                   <>
-                    {/* Display a snippet and an expand button when not expanded */}
                     {item.matchedSnippet && (
                       <p className="text-zinc-600 text-base mb-3 leading-snug">
                         {highlightMatch(item.matchedSnippet, query)}
                       </p>
                     )}
                     <button
-                      onClick={() => handleExpand(item.title)}
+                      onClick={() => handleExpand(item.id)}
                       className="px-6 py-2 bg-lime-600 text-white rounded-lg hover:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:ring-opacity-100 transition duration-200 ease-in-out shadow-md font-medium"
                     >
                       Expand
@@ -266,7 +290,5 @@ const Search = () => {
   );
 };
 
+// Export the Search component as default
 export default Search;
-
-
-// make reference allow enter
