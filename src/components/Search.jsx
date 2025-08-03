@@ -160,7 +160,10 @@ const Search = () => {
           ) : showResults && displayArticles.length === 0 && query === '' ? (
             <p className="text-lime-600 text-center text-lg">No articles available. Create some!</p>
           ) : (
-            displayArticles.map((item) => (
+            displayArticles.map((item) => {
+              const contentP = item.content.split(/\r?\n\s*\r?\n/).filter(contentP => contentP.trim () !== '');
+              const referencesP = item.references.split(/\r?\n\s*\r?\n/).filter(referencesP => referencesP.trim () !== '');
+              return (
               <div key={item.id} className="bg-zinc-900 p-6 rounded-lg shadow-lg border border-lime-600">
                 <div className="flex justify-between items-center mb-3">
                   <h2 className="text-2xl text-lime-600">{item.title}</h2>
@@ -211,14 +214,21 @@ const Search = () => {
                 </div>
                 {expandedItemId === item.id ? (
                   <>
-                    <p className="font-['Roboto'] text-white mb-3 leading-relaxed">{item.content}</p>
+                    <p className="font-['Roboto'] text-white mb-3 leading-relaxed">
+                      {contentP.map((contentP, index) => (
+                        <p key={index}>
+                          {contentP.trim()}
+                          <br />
+                          <br />
+                        </p>
+                      ))}</p>
                     <p className="font-['Roboto'] text-lime-600 italic">
-                      {item.references.split(/(?<=\.’" {2})|(?<=\.'" {2})|(?<=\." {2})|(?<=\. {2})/).map((ref, index) => (
-                        <span key={index}>
-                          {ref}
+                      {referencesP.map((referencesP, index) => (
+                        <p key={index}>
+                          {referencesP.trim()}
                           <br />
                           <br />
-                        </span>
+                        </p>
                       ))}
                     </p>
                     <button
@@ -244,7 +254,7 @@ const Search = () => {
                   </>
                 )}
               </div>
-            ))
+            )})
           )}
         </div>
       </div>

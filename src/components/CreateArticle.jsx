@@ -61,7 +61,7 @@ const CreateArticle = () => {
       setMessage(`Article "${title.trim()}" updated successfully!`);
     } else {
       const newArticle = {
-        id: Date.now().toString(36) + Math.random().toString(36).substr(2),
+        id: Date.now().toString(36) + Math.random().toString(36).substring(2),
         title: title.trim(),
         content: content.trim(),
         references: references.trim(),
