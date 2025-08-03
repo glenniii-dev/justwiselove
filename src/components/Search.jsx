@@ -130,7 +130,7 @@ const Search = () => {
   };
 
   const handleEdit = (articleToEdit) => {
-    navigate('', { state: { articleToEdit } });
+    navigate('../index.html', { state: { articleToEdit } });
   };
 
   return (
