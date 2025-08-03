@@ -130,7 +130,7 @@ const Search = () => {
   };
 
   const handleEdit = (articleToEdit) => {
-    navigate('../index.html', { state: { articleToEdit } });
+    navigate('https://glenniii-dev.github.io/justwiselove/', { state: { articleToEdit } });
   };
 
   return (
