@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import search from '../search.js';
 
 // Search component for displaying and managing articles with search functionality
@@ -52,6 +53,8 @@ const Search = () => {
       window.removeEventListener('storage', handleStorageChange);
     };
   }, []); // Empty dependency array ensures this runs only on mount/unmount
+
+  const navigate = useNavigate();
 
   // Highlights search query matches in text by wrapping them in styled <strong> tags
   const highlightMatch = (text, query) => {
@@ -169,12 +172,8 @@ const Search = () => {
     }
   };
 
-  // Prepare an article for editing by saving it to localStorage
   const handleEdit = (articleToEdit) => {
-    // Store article data in localStorage for editing on another page
-    localStorage.setItem('articleToEdit', JSON.stringify(articleToEdit));
-    // Navigation to edit page (commented out, assumes router integration)
-    // window.location.href = '/create-article';
+    navigate('/create-article', { state: { articleToEdit } });
   };
 
   // Render the search interface
@@ -249,7 +248,7 @@ const Search = () => {
                     <p className="font-['Roboto'] text-white mb-3 leading-relaxed">{item.content}</p>
                     {/* Split references into separate lines with regex */}
                     <p className="font-['Roboto'] text-lime-600 italic">
-                      {item.references.split(/(?<=\.’"  )|(?<=\.'"  )|(?<=\."  )|(?<=\.  )/).map((ref, index) => (
+                      {item.references.split(/(?<=\.’" {2})|(?<=\.'" {2})|(?<=\." {2})|(?<=\. {2})/).map((ref, index) => (
                         <span key={index}>
                           {ref}
                           <br />
