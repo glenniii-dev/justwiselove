@@ -171,7 +171,7 @@ const CreateArticle = () => {
               id="content"
               placeholder="Write article content..."
               rows="10"
-              className="p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400 resize-y"
+              className="font-['Roboto'] p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400 resize-y"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
@@ -186,7 +186,7 @@ const CreateArticle = () => {
               id="references"
               placeholder="List your references..."
               rows="5"
-              className="p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400"
+              className="font-['Roboto'] p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400"
               value={references}
               onChange={(e) => setReferences(e.target.value)}
               required
