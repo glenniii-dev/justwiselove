@@ -2,7 +2,7 @@ import React from 'react';
 import FamilyWorship from './FamilyWorship.jsx';
 import Search from './Search.jsx';
 import CreateArticle from './CreateArticle.jsx';
-import FrequentlyAskedQuestions from './FrequentlyAskedQuestions.jsx';
+import Truth from './Truth.jsx';
 
 export default function Main() {
   return (
@@ -12,7 +12,7 @@ export default function Main() {
         <Search />
         <FamilyWorship />
         <CreateArticle />
-        <FrequentlyAskedQuestions />
+        <Truth />
       </section>
     </main>
   );
