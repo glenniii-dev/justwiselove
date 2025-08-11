@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import truth from '../truth.js';
+import faq from '../faq.js';
 
-const Truth = () => {
+const FrequentlyAskedQuestions = () => {
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [expandedItemId, setExpandedItemId] = useState(null);
 
-  const articles = [...truth].sort((a, b) => a.title.localeCompare(b.title));
+  const articles = [...faq].sort((a, b) => a.title.localeCompare(b.title));
 
   const handleExpand = (id) => {
     setExpandedItemId(id);
@@ -24,7 +24,7 @@ const Truth = () => {
   return (
     <div className="min-h-50 bg-zinc-950 p-4 sm:p-6 lg:p-8 flex flex-col items-center font-inter mt-8 rounded-lg text-left">
       <div className="w-full max-w-4xl">
-        <h1 className="text-4xl font-bold text-lime-600 mb-8 text-center">Explore Truth</h1>
+        <h1 className="text-4xl font-bold text-lime-600 mb-8 text-center">Frequently Asked Questions</h1>
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <button
             onClick={handleToggleDisplay}
@@ -90,4 +90,4 @@ const Truth = () => {
   );
 };
 
-export default Truth;
+export default FrequentlyAskedQuestions;
