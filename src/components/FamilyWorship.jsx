@@ -5,15 +5,15 @@ const renderWeekContent = (item) => (
   <div key={item.D} className="bg-zinc-950 p-4 rounded-lg mb-4">
     <h3 className="text-2xl font-semibold m-4">{item.D}</h3>
     <p className="text-lime-600 text-xl mb-3">{item.T}</p>
-    <p className="font-[Roboto] text-lg">{item.R}</p>
+    <p className="font-[Rubik] text-lg">{item.R}</p>
     <p className="text-lime-600 text-xl m-3">{item.T1}</p>
-    <p className="font-[Roboto] text-lg">{item.R1}</p>
+    <p className="font-[Rubik] text-lg">{item.R1}</p>
     <p className="text-lime-600 text-xl m-3">{item.T2}</p>
-    <p className="font-[Roboto] text-lg">{item.R2}</p>
+    <p className="font-[Rubik] text-lg">{item.R2}</p>
     <p className="text-lime-600 text-xl m-3">{item.T3}</p>
-    <p className="font-[Roboto] text-lg">{item.R3}</p>
+    <p className="font-[Rubik] text-lg">{item.R3}</p>
     <p className="text-lime-600 text-xl m-3">{item.T4}</p>
-    <p className="font-[Roboto] text-lg">{item.R4}</p>
+    <p className="font-[Rubik] text-lg">{item.R4}</p>
   </div>
 );
 
@@ -53,7 +53,7 @@ function FamilyWorship() {
   }
 
   return (
-    <div className="mt-10 bg-zinc-950 w-full text-white p-4 sm:p-6 lg:p-8 rounded-lg shadow-lg">
+    <div className="mt-10 bg-zinc-950 w-full text-white p-8 rounded-lg shadow-lg">
       <h2 className="text-lime-600 text-4xl font-black mb-5">Family Worship</h2>
       <div className="bg-zinc-950 rounded-lg">
         {currentWeek ? (
