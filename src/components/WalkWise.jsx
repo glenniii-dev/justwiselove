@@ -19,9 +19,10 @@ const WalkWise = () => {
   return (
     <div className="min-h-50 bg-zinc-950 p-8 flex flex-col items-center font-inter mt-6 rounded-lg text-left">
       <div className="w-full max-w-4xl">
-        <h1 className="text-4xl font-bold text-lime-600 mb-8 text-center">Walk Wise</h1>
-
-        <div className="flex flex-col sm:flex-row gap-4">
+        <h1 className="text-4xl font-bold text-lime-600 mb-3 text-center">Walk Wise</h1>
+        <p className="font-['Barlow'] text-white text-lg text-center mb-3">This section delivers articles teaching accurate Bible knowledge, guiding all sorts of people to truth.</p>
+        <p className="font-['Barlow'] text-lime-600 text-lg text-center">"Whose will is that all sorts of people should be saved and come to an accurate knowledge of truth."<br />- 1 Timothy 2:4</p>
+        <div className="flex flex-col sm:flex-row gap-4 mt-5">
           <button
             onClick={handleToggleDisplay}
             className="w-50 mx-auto px-6 py-3 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-lime-600 transition duration-200 ease-in-out shadow-md font-medium"
