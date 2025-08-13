@@ -63,7 +63,7 @@ function FamilyWorship() {
             {futureWeeks.length > 0 && ( 
               <button
                 onClick={() => setShowFutureWeeks(!showFutureWeeks)}
-                className="bg-zinc-900 hover:bg-zinc-800 px-[50px] text-lime-600 font-bold py-2 rounded-lg mt-4 mb-6"
+                className="w-50 mx-auto px-6 py-3 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-lime-600 transition duration-200 ease-in-out shadow-md font-medium"
               >
                 {showFutureWeeks ? 'HIDE' : 'SHOW'}
               </button>
