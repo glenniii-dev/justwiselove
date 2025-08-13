@@ -156,7 +156,7 @@ const CreateArticle = () => {
               type="text"
               id="title"
               placeholder="Enter article title..."
-              className="p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400"
+              className="font-['Barlow'] p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
@@ -197,7 +197,7 @@ const CreateArticle = () => {
             type="submit"
             className="w-full px-6 py-3 bg-lime-600 text-white rounded-lg hover:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:ring-opacity-100 transition duration-200 ease-in-out shadow-md font-bold text-xl uppercase tracking-wider"
           >
-            {editingArticleId ? 'Save Changes' : 'Create Article'}
+            {editingArticleId ? 'SAVE' : 'CREATE'}
           </button>
 
           <div className="flex flex-col sm:flex-row gap-4 mt-6">
