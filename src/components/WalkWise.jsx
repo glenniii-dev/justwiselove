@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import faq from '../faq.js';
+import walkwise from '../walkwise.js';
 
-const FrequentlyAskedQuestions = () => {
+const WalkWise = () => {
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [expandedItemId, setExpandedItemId] = useState(null);
 
-  const articles = [...faq].sort((a, b) => a.title.localeCompare(b.title));
+  const articles = [...walkwise].sort((a, b) => a.title.localeCompare(b.title));
 
   const handleToggleItem = (id) => {
     setExpandedItemId((prevId) => (prevId === id ? null : id));
@@ -17,11 +17,11 @@ const FrequentlyAskedQuestions = () => {
   };
 
   return (
-    <div className="min-h-50 bg-zinc-950 p-8 flex flex-col items-center font-inter mt-8 rounded-lg text-left">
+    <div className="min-h-50 bg-zinc-950 p-8 flex flex-col items-center font-inter mt-6 rounded-lg text-left">
       <div className="w-full max-w-4xl">
-        <h1 className="text-4xl font-bold text-lime-600 mb-8 text-center">Frequently Asked Questions</h1>
+        <h1 className="text-4xl font-bold text-lime-600 mb-8 text-center">Walk Wise</h1>
 
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row gap-4">
           <button
             onClick={handleToggleDisplay}
             className="w-50 mx-auto px-6 py-3 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-lime-600 transition duration-200 ease-in-out shadow-md font-medium"
@@ -30,7 +30,7 @@ const FrequentlyAskedQuestions = () => {
           </button>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-6 [&>*:first-child]:mt-6">
             {isDisplayed && articles.map((item) => {
               const contentP = item.content.split(/\r?\n\s*\r?\n/).filter(p => p.trim() !== '');
               const referencesP = item.references.split(/\r?\n\s*\r?\n/).filter(p => p.trim() !== '');
@@ -51,7 +51,7 @@ const FrequentlyAskedQuestions = () => {
 
                   {isExpanded && (
                     <>
-                      <div className="font-['Rubik'] text-white leading-relaxed">
+                      <div className="font-['Barlow'] text-white leading-relaxed">
                         {contentP.map((p, index) => (
                           <p key={index}>
                             {p.trim()}
@@ -59,7 +59,7 @@ const FrequentlyAskedQuestions = () => {
                           </p>
                         ))}
                       </div>
-                      <div className="font-['Rubik'] text-lime-600 italic">
+                      <div className="font-['Barlow'] text-lime-600 italic">
                         {referencesP.map((p, index) => (
                           <p key={index}>
                             {p.trim()}
@@ -79,4 +79,4 @@ const FrequentlyAskedQuestions = () => {
   );
 };
 
-export default FrequentlyAskedQuestions;
+export default WalkWise;

@@ -1,6 +1,6 @@
 let identifier = 0;
 
-const truth = [
+const deepdive = [
   {
     id: identifier++,
     title: `Accuracy`,
@@ -159,4 +159,4 @@ const truth = [
   }
 ];
 
-export default truth;
+export default deepdive;

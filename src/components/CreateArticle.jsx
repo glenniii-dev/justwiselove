@@ -138,7 +138,7 @@ const CreateArticle = () => {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 p-8 flex flex-col items-center font-inter mt-8 rounded-lg">
+    <div className="h-auto bg-zinc-950 p-8 flex flex-col items-center font-inter mt-6 rounded-lg">
       <div className="w-full max-w-4xl">
         <h1 className="text-4xl font-bold text-lime-600 mb-8 text-center">
           {editingArticleId ? 'Edit Article' : 'Create Article'}
@@ -171,7 +171,7 @@ const CreateArticle = () => {
               id="content"
               placeholder="Write article content..."
               rows="10"
-              className="font-['Rubik'] p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400 resize-y"
+              className="font-['Barlow'] p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400 resize-y"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
@@ -186,7 +186,7 @@ const CreateArticle = () => {
               id="references"
               placeholder="List your references..."
               rows="5"
-              className="font-['Rubik'] p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400"
+              className="font-['Barlow'] p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-500 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400"
               value={references}
               onChange={(e) => setReferences(e.target.value)}
               required
