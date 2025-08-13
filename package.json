@@ -9,9 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "npm run build && powershell -Command \"Remove-Item -Recurse -Force docs; Copy-Item -Recurse -Force dist docs; git add docs; git commit -m \\\"Auto deploy to docs\\\"; git push\""
+    "deploy": "npm run build && powershell -Command \"if (Test-Path docs) { Get-ChildItem docs -Exclude CNAME | Remove-Item -Recurse -Force }; else { New-Item -ItemType Directory -Path docs | Out-Null }; Copy-Item -Recurse -Force dist\\* docs\\; git add docs; git commit -m \\\"Auto deploy to docs\\\"; git push\""
   },
-  "dependencies": {
+    "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

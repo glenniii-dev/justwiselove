@@ -2,7 +2,7 @@ import React from 'react';
 import FamilyWorship from './FamilyWorship.jsx';
 import Search from './Search.jsx';
 import CreateArticle from './CreateArticle.jsx';
-import FrequentlyAskedQuestions from './WalkWise.jsx';
+import WalkWise from './WalkWise.jsx';
 import DeepDive from './DeepDive.jsx';
 
 export default function Main() {
@@ -12,9 +12,9 @@ export default function Main() {
         <h2 className="font-['Barlow'] bg-zinc-950 rounded-lg text-lg text-white p-[10px]">"Now these were more noble-minded than those in Thessalonica, for they accepted the word with the greatest eagerness of mind, carefully examining the Scriptures daily to see whether these things were so."- Acts 17:11</h2>
         <Search />
         <FamilyWorship />
-        <CreateArticle />
-        <FrequentlyAskedQuestions />
+        <WalkWise />
         <DeepDive />
+        <CreateArticle />
       </section>
     </main>
   );

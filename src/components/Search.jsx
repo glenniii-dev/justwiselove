@@ -10,11 +10,9 @@ const Search = () => {
       const articleMap = new Map();
       search.forEach(item => articleMap.set(item.id, item));
       storedArticles.forEach(item => articleMap.set(item.id, item));
-      const combinedArticles = Array.from(articleMap.values());
-      console.log("Combined articles:", combinedArticles); // Debug
-      return combinedArticles;
+      return Array.from(articleMap.values());
     } catch (error) {
-      console.error("Failed to load articles from local storage or combine with default:", error);
+      console.error("Failed to load articles:", error);
       return search;
     }
   };
@@ -24,12 +22,10 @@ const Search = () => {
   const [query, setQuery] = useState('');
   const [expandedItemId, setExpandedItemId] = useState(null);
 
-  // Initialize searchArticles on mount
   useEffect(() => {
     setSearchArticles(getCombinedArticles());
   }, []);
 
-  // Listen for storage changes
   useEffect(() => {
     const handleStorageChange = (event) => {
       if (event.key === 'searchArticlesData' || event.key === null) {
@@ -37,9 +33,7 @@ const Search = () => {
       }
     };
     window.addEventListener('storage', handleStorageChange);
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
   const navigate = useNavigate();
@@ -51,12 +45,8 @@ const Search = () => {
       <span>
         {parts.map((part, index) =>
           part.toLowerCase() === query.toLowerCase() ? (
-            <strong key={index} className="bg-lime-600 text-white rounded-sm px-0.5">
-              {part}
-            </strong>
-          ) : (
-            part
-          )
+            <strong key={index} className="bg-lime-600 text-white rounded-sm px-0.5">{part}</strong>
+          ) : part
         )}
       </span>
     );
@@ -91,12 +81,8 @@ const Search = () => {
     }
   }
 
-  const handleExpand = (id) => {
-    setExpandedItemId(id);
-  };
-
-  const handleClose = () => {
-    setExpandedItemId(null);
+  const handleToggleItem = (id) => {
+    setExpandedItemId((prevId) => (prevId === id ? null : id));
   };
 
   const handleSearchClick = () => {
@@ -107,25 +93,23 @@ const Search = () => {
   const handleQueryChange = (e) => {
     const newQuery = e.target.value;
     setQuery(newQuery);
-    if (newQuery === '') {
-      setShowResults(false);
-    }
+    if (newQuery === '') setShowResults(false);
   };
 
   const handleDelete = (articleId) => {
     const isConfirmed = window.confirm("Are you sure you want to permanently delete this article?");
-    if (isConfirmed) {
-      try {
-        const storedArticlesRaw = localStorage.getItem('searchArticlesData');
-        const storedArticles = storedArticlesRaw ? JSON.parse(storedArticlesRaw) : [];
-        const updatedArticles = storedArticles.filter(item => item.id !== articleId);
-        localStorage.setItem('searchArticlesData', JSON.stringify(updatedArticles));
-        setSearchArticles(getCombinedArticles());
-        alert("Article deleted successfully.");
-      } catch (error) {
-        console.error("Failed to delete article:", error);
-        alert("An error occurred while trying to delete the article.");
-      }
+    if (!isConfirmed) return;
+
+    try {
+      const storedArticlesRaw = localStorage.getItem('searchArticlesData');
+      const storedArticles = storedArticlesRaw ? JSON.parse(storedArticlesRaw) : [];
+      const updatedArticles = storedArticles.filter(item => item.id !== articleId);
+      localStorage.setItem('searchArticlesData', JSON.stringify(updatedArticles));
+      setSearchArticles(getCombinedArticles());
+      alert("Article deleted successfully.");
+    } catch (error) {
+      console.error("Failed to delete article:", error);
+      alert("An error occurred while trying to delete the article.");
     }
   };
 
@@ -140,7 +124,7 @@ const Search = () => {
           <input
             type="text"
             placeholder="Search For Topics Or People..."
-            className="p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400"
+            className="font-['Barlow'] p-3 w-full rounded-lg bg-zinc-800 text-white border-2 border-lime-600 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent transition duration-200 ease-in-out shadow-md placeholder-zinc-400"
             value={query}
             onChange={handleQueryChange}
           />
@@ -151,6 +135,7 @@ const Search = () => {
             Search
           </button>
         </div>
+
         <div className={displayArticles.length > 0 ? "space-y-6 [&>*:first-child]:mt-6" : ""}>
           {showResults && displayArticles.length === 0 && query !== '' ? (
             <p className="text-lime-600 text-center text-lg">
@@ -160,100 +145,64 @@ const Search = () => {
             <p className="text-lime-600 text-center text-lg">No articles available. Create some!</p>
           ) : (
             displayArticles.map((item) => {
-              const contentP = item.content.split(/\r?\n\s*\r?\n/).filter(contentP => contentP.trim () !== '');
-              const referencesP = item.references.split(/\r?\n\s*\r?\n/).filter(referencesP => referencesP.trim () !== '');
+              const contentP = item.content.split(/\r?\n\s*\r?\n/).filter(p => p.trim() !== '');
+              const referencesP = item.references.split(/\r?\n\s*\r?\n/).filter(p => p.trim() !== '');
+              const isExpanded = expandedItemId === item.id;
+
               return (
-              <div key={item.id} className="bg-zinc-900 p-6 rounded-lg shadow-lg border border-lime-600">
-                <div className="flex justify-between items-center mb-3">
-                  <h2 className="text-2xl text-lime-600">{item.title}</h2>
-                  {item.isUserCreated && (
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => handleEdit(item)}
-                        className="text-lime-600 hover:text-lime-400"
-                        title="Edit Article"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
+                <div key={item.id} className="bg-zinc-900 p-6 rounded-lg shadow-lg border border-lime-600">
+                  <div
+                    className="flex justify-between items-center cursor-pointer"
+                    onClick={() => handleToggleItem(item.id)}
+                  >
+                    <h2 className="text-2xl text-lime-600 mx-auto">{item.title}</h2>
+                    {item.isUserCreated && (
+                      <div className="flex gap-2">
+                        <button
+                          onClick={(e) => { e.stopPropagation(); handleEdit(item); }}
+                          className="text-lime-600 hover:text-lime-400"
+                          title="Edit Article"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                          />
-                        </svg>
-                      </button>
-                      <button
-                        onClick={() => handleDelete(item.id)}
-                        className="text-red-600 hover:text-red-400"
-                        title="Delete Article"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-6 w-6"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                          </svg>
+                        </button>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); handleDelete(item.id); }}
+                          className="text-red-600 hover:text-red-400"
+                          title="Delete Article"
                         >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          />
-                        </svg>
-                      </button>
-                    </div>
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+
+                  {isExpanded && (
+                    <>
+                      <p className="font-['Barlow'] text-white mb-3 leading-relaxed">
+                        {contentP.map((p, idx) => (
+                          <p key={idx}>{p}<br /><br /></p>
+                        ))}
+                      </p>
+                      <p className="font-['Barlow'] text-lime-600 italic">
+                        {referencesP.map((p, idx) => (
+                          <p key={idx}>{p}<br /><br /></p>
+                        ))}
+                      </p>
+                    </>
+                  )}
+
+                  {!isExpanded && item.matchedSnippet && query && (
+                    <p className="text-zinc-600 text-base mb-3 leading-snug">
+                      {highlightMatch(item.matchedSnippet, query)}
+                    </p>
                   )}
                 </div>
-                {expandedItemId === item.id ? (
-                  <>
-                    <p className="font-['Barlow'] text-white mb-3 leading-relaxed">
-                      {contentP.map((contentP, index) => (
-                        <p key={index}>
-                          {contentP.trim()}
-                          <br />
-                          <br />
-                        </p>
-                      ))}</p>
-                    <p className="font-['Barlow'] text-lime-600 italic">
-                      {referencesP.map((referencesP, index) => (
-                        <p key={index}>
-                          {referencesP.trim()}
-                          <br />
-                          <br />
-                        </p>
-                      ))}
-                    </p>
-                    <button
-                      onClick={handleClose}
-                      className="mt-5 px-6 py-2 bg-lime-600 text-white rounded-lg hover:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:ring-opacity-100 transition duration-200 ease-in-out shadow-md font-medium"
-                    >
-                      Close
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    {item.matchedSnippet && (
-                      <p className="text-zinc-600 text-base mb-3 leading-snug">
-                        {highlightMatch(item.matchedSnippet, query)}
-                      </p>
-                    )}
-                    <button
-                      onClick={() => handleExpand(item.id)}
-                      className="px-6 py-2 bg-lime-600 text-white rounded-lg hover:bg-zinc-950 focus:outline-none focus:ring-2 focus:ring-lime-600 focus:ring-opacity-100 transition duration-200 ease-in-out shadow-md font-medium"
-                    >
-                      Expand
-                    </button>
-                  </>
-                )}
-              </div>
-            )})
+              );
+            })
           )}
         </div>
       </div>
