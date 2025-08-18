@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import family from '../family.js';
+import family from '../utils/family.js';
 
 const renderWeekContent = (item) => (
   <div key={item.D} className="bg-zinc-950 p-4 rounded-lg mb-4">
@@ -30,7 +30,7 @@ function FamilyWorship() {
     const itemDate = new Date(family[i].D);
 
     const endOfWeek = new Date(itemDate);
-    endOfWeek.setDate(itemDate.getDate() + 1);
+    endOfWeek.setDate(itemDate.getDate() - 6);
 
     if (today >= itemDate && today <= endOfWeek) {
       currentWeek = family[i];

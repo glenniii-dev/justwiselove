@@ -246,14 +246,14 @@ const family = [
   },
   {
     D: "August 15, 2025",
-    T: "Paul & Timothy Educated Men",
+    T: "Paul",
     R: "Acts 17:16-34 shows Paul reasoning in Athens, declaring Jehovah (Acts 17:23). His courage inspires ministry (Matthew 24:14). Families defend truth, preparing for paradise (John 17:3). Discuss: How can we reason like Paul? Let’s share a scripture this week.",
     T1: "Philosophy",
     R1: "Colossians 2:8 warns against philosophy. Romans 1:20 shows creation reveals Jehovah. Families reject human wisdom, focusing on scripture (Psalm 119:105). Discuss: Why avoid philosophy? Let’s study truth this week."
   },
   {
     D: "August 22, 2025",
-    T: "Paul & Timothy",
+    T: "Timothy",
     R: "Acts 16:1-5 introduces Timothy, mentored by Paul. His zeal (Acts 16:3-4) inspires youths. Families support spiritual goals, preparing for paradise (John 17:3). Discuss: How can youths serve like Timothy? Let’s encourage a youth this week.",
     T1: "Youth",
     R1: "1 Timothy 4:12 urges youths to excel. Psalm 119:9 keeps them pure. Families nurture youths’ faith, preparing for eternal life (John 17:3). Discuss: How can youths grow spiritually? Let’s help a youth this week.",

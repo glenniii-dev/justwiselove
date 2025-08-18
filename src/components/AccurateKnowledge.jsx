@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import walkwise from '../utils/walkwise.js';
+import questions from '../utils/questions.js';
 
-const WalkWise = () => {
+const AccurateKnowledge = () => {
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [expandedItemId, setExpandedItemId] = useState(null);
 
-  const articles = [...walkwise].sort((a, b) => a.title.localeCompare(b.title));
+  const articles = [...questions].sort((a, b) => a.title.localeCompare(b.title));
 
   const handleToggleItem = (id) => {
     setExpandedItemId((prevId) => (prevId === id ? null : id));
@@ -19,9 +19,9 @@ const WalkWise = () => {
   return (
     <div className="min-h-50 bg-zinc-950 p-8 flex flex-col items-center font-inter mt-6 rounded-lg text-left">
       <div className="w-full max-w-4xl">
-        <h1 className="text-4xl font-bold text-lime-600 mb-3 text-center">Walk Wise</h1>
-        <p className="font-['Barlow'] text-white text-lg text-center mb-3">Explore articles that guide you to apply Bible principles. This section helps all sorts of people walk the path to truth through practical, scripturally grounded teachings.</p>
-        <p className="font-['Barlow'] text-lime-600 text-lg text-center">“The one walking with the wise will become wise, but the one who has dealings with the stupid will fare badly.”<br />— Proverbs 13:20</p>
+        <h1 className="text-4xl font-bold text-lime-600 mb-3 text-center">Accurate Knowledge</h1>
+        <p className="font-['Barlow'] text-white text-lg text-center mb-3">Test and deepen your understanding of Bible truth with interactive questions and answers. This section guides you along the way to a closer relationship with Jehovah.</p>
+        <p className="font-['Barlow'] text-lime-600 text-lg text-center">“Whose will is that all sorts of people should be saved and come to an accurate knowledge of truth.”<br />— 1 Timothy 2:4</p>
         <div className="flex flex-col sm:flex-row gap-4 mt-5">
           <button
             onClick={handleToggleDisplay}
@@ -80,4 +80,4 @@ const WalkWise = () => {
   );
 };
 
-export default WalkWise;
+export default AccurateKnowledge;

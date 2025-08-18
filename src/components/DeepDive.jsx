@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import deepdive from '../deepdive.js';
+import deepdive from '../utils/deepdive.js';
 
 const DeepDive = () => {
   const [isDisplayed, setIsDisplayed] = useState(false);
@@ -20,8 +20,8 @@ const DeepDive = () => {
     <div className="min-h-50 bg-zinc-950 p-8 flex flex-col items-center font-inter mt-6 rounded-lg text-left">
       <div className="w-full max-w-4xl">
         <h1 className="text-4xl font-bold text-lime-600 mb-3 text-center">Deep Dive</h1>
-        <p className="font-['Barlow'] text-white text-lg text-center mb-3">This section provides in-depth articles, offering complex explanations for mature spiritual understanding.</p>
-        <p className="font-['Barlow'] text-lime-600 text-lg text-center">"But solid food belongs to mature people, to those who through use have their powers of discernment trained to distinguish both right and wrong."<br />- Hebrews 5:14</p>
+        <p className="font-['Barlow'] text-white text-lg text-center mb-3">Delve into articles that explore complex Bible teachings. Designed for those seeking mature spiritual insight, this section strengthens your discernment with further research.</p>
+        <p className="font-['Barlow'] text-lime-600 text-lg text-center">“But solid food belongs to mature people, to those who through use have their powers of discernment trained to distinguish both right and wrong.”<br />— Hebrews 5:14</p>
         <div className="flex flex-col sm:flex-row gap-4 mt-5">
           <button
             onClick={handleToggleDisplay}

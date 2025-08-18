@@ -4,6 +4,7 @@ import Search from './Search.jsx';
 import CreateArticle from './CreateArticle.jsx';
 import WalkWise from './WalkWise.jsx';
 import DeepDive from './DeepDive.jsx';
+import AccurateKnowledge from './AccurateKnowledge.jsx';
 
 export default function Main() {
   return (
@@ -14,6 +15,7 @@ export default function Main() {
         <FamilyWorship />
         <WalkWise />
         <DeepDive />
+        <AccurateKnowledge />
         <CreateArticle />
       </section>
     </main>

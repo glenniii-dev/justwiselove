@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import search from '../search.js';
+import search from '../utils/search.js';
 
 const Search = () => {
   const getCombinedArticles = () => {
