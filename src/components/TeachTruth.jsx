@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import questions from '../utils/questions.js';
+import teachtruth from '../utils/teachtruth.js';
 
-const AccurateKnowledge = () => {
+const TeachTruth = () => {
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [expandedItemId, setExpandedItemId] = useState(null);
 
-  const articles = [...questions].sort((a, b) => a.title.localeCompare(b.title));
+  const articles = [...teachtruth].sort((a, b) => a.title.localeCompare(b.title));
 
   const handleToggleItem = (id) => {
     setExpandedItemId((prevId) => (prevId === id ? null : id));
@@ -19,7 +19,7 @@ const AccurateKnowledge = () => {
   return (
     <div className="min-h-50 bg-zinc-950 p-8 flex flex-col items-center font-inter mt-6 rounded-lg text-left">
       <div className="w-full max-w-4xl">
-        <h1 className="text-4xl font-bold text-lime-600 mb-3 text-center">Accurate Knowledge</h1>
+        <h1 className="text-4xl font-bold text-lime-600 mb-3 text-center">Teach Truth</h1>
         <p className="font-['Barlow'] text-white text-lg text-center mb-3">Test and deepen your understanding of Bible truth with interactive questions and answers. This section guides you along the way to a closer relationship with Jehovah.</p>
         <p className="font-['Barlow'] text-lime-600 text-lg text-center">“Whose will is that all sorts of people should be saved and come to an accurate knowledge of truth.”<br />— 1 Timothy 2:4</p>
         <div className="flex flex-col sm:flex-row gap-4 mt-5">
@@ -34,6 +34,7 @@ const AccurateKnowledge = () => {
         <div className="space-y-6 [&>*:first-child]:mt-6">
             {isDisplayed && articles.map((item) => {
               const contentP = item.content.split(/\r?\n\s*\r?\n/).filter(p => p.trim() !== '');
+              const answersP = item.answers.split(/\r?\n\s*\r?\n/).filter(p => p.trim() !== '');
               const referencesP = item.references.split(/\r?\n\s*\r?\n/).filter(p => p.trim() !== '');
               const isExpanded = expandedItemId === item.id;
 
@@ -60,6 +61,15 @@ const AccurateKnowledge = () => {
                           </p>
                         ))}
                       </div>
+                      <div className="font-['Barlow'] text-white leading-relaxed">
+                        <span className="text-white">Answers:</span>
+                        {answersP.map((p, index) => (
+                          <p key={index} className="text-zinc-900 hover:text-white">
+                            {p.trim()}
+                            <br /><br />
+                          </p>
+                        ))}
+                      </div>
                       <div className="font-['Barlow'] text-lime-600 italic">
                         {referencesP.map((p, index) => (
                           <p key={index}>
@@ -80,4 +90,4 @@ const AccurateKnowledge = () => {
   );
 };
 
-export default AccurateKnowledge;
+export default TeachTruth;
