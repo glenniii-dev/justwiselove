@@ -1600,7 +1600,7 @@ const search = [
   {
     id: identifier++,
     title: `Simon (of Cyrene)`,
-    content: `Simon of Cyrene carried Jesus’ cross, aiding in God’s purpose. His service teaches us to support Christ’s work. Simon’s example encourages us to assist Jehovah’s organization, serving humbly in times of need.`,
+    content: `Simon of Cyrene carried Jesus’ stake, aiding in God’s purpose. His service teaches us to support Christ’s work. Simon’s example encourages us to assist Jehovah’s organization, serving humbly in times of need.`,
     references: `Mark 15:21 - They compelled a passerby, Simon of Cyrene, to carry his torture stake.\n\nLuke 23:26 - They seized Simon, a certain man of Cyrene.`
   },
   {
