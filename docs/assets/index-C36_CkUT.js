@@ -549,7 +549,7 @@ Genesis 10:22 - The sons of Shem: Elam and Asshur.`},{id:o++,title:"Shimei",cont
 
 Luke 2:29 - Now, Sovereign Lord, you are letting your slave go.`},{id:o++,title:"Simeon (the Zealot)",content:"Simeon, an apostle, followed Jesus faithfully, serving zealously. His commitment teaches us to dedicate ourselves to Christ. Simeon’s example inspires us to proclaim Jehovah’s truth, supporting His organization with unwavering faith.",references:`Luke 6:15 - Matthew and Thomas... and Simon who is called the Zealot.
 
-Acts 1:13 - Simon the zealous one.`},{id:o++,title:"Simon (of Cyrene)",content:"Simon of Cyrene carried Jesus’ cross, aiding in God’s purpose. His service teaches us to support Christ’s work. Simon’s example encourages us to assist Jehovah’s organization, serving humbly in times of need.",references:`Mark 15:21 - They compelled a passerby, Simon of Cyrene, to carry his torture stake.
+Acts 1:13 - Simon the zealous one.`},{id:o++,title:"Simon (of Cyrene)",content:"Simon of Cyrene carried Jesus’ stake, aiding in God’s purpose. His service teaches us to support Christ’s work. Simon’s example encourages us to assist Jehovah’s organization, serving humbly in times of need.",references:`Mark 15:21 - They compelled a passerby, Simon of Cyrene, to carry his torture stake.
 
 Luke 23:26 - They seized Simon, a certain man of Cyrene.`},{id:o++,title:"Simon (the Zealot)",content:"Simon, an apostle called the Zealot, served Jesus faithfully. His zeal teaches us to dedicate ourselves to God’s work. Simon’s example inspires us to support Jehovah’s organization, proclaiming His truth with unwavering commitment.",references:`Matthew 10:4 - Simon the Cananaean, and Judas Iscariot.
 
