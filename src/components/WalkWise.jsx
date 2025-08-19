@@ -17,7 +17,7 @@ const WalkWise = () => {
   };
 
   return (
-    <div className="min-h-50 bg-zinc-950 p-8 flex flex-col items-center font-inter mt-6 rounded-lg text-left">
+    <div className="min-h-50 bg-zinc-950 pt-8 pb-2 px-2 min-sm:p-8 flex flex-col items-center font-inter mt-6 rounded-lg text-left">
       <div className="w-full max-w-4xl">
         <h1 className="text-4xl font-bold text-lime-600 mb-3 text-center">Walk Wise</h1>
         <p className="font-['Barlow'] text-white text-lg text-center mb-3">Explore articles that guide you to apply Bible principles. This section helps all sorts of people walk the path to truth through practical, scripturally grounded teachings.</p>

@@ -17,7 +17,7 @@ const DeepDive = () => {
   };
 
   return (
-    <div className="min-h-50 bg-zinc-950 p-8 flex flex-col items-center font-inter mt-6 rounded-lg text-left">
+    <div className="min-h-50 bg-zinc-950 pt-8 pb-2 px-2 min-sm:p-8 flex flex-col items-center font-inter mt-6 rounded-lg text-left">
       <div className="w-full max-w-4xl">
         <h1 className="text-4xl font-bold text-lime-600 mb-3 text-center">Deep Dive</h1>
         <p className="font-['Barlow'] text-white text-lg text-center mb-3">Delve into articles that explore complex Bible teachings. Designed for those seeking mature spiritual insight, this section strengthens your discernment with further research.</p>
