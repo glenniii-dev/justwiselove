@@ -138,7 +138,7 @@ const CreateArticle = () => {
   };
 
   return (
-    <div className="h-auto bg-zinc-950 p-8 flex flex-col items-center font-inter mt-6 rounded-lg">
+    <div className="h-auto bg-zinc-950 pt-8 pb-2 px-2 min-sm:p-8 flex flex-col items-center font-inter mt-6 rounded-lg">
       <div className="w-full max-w-4xl">
         <h1 className="text-4xl font-bold text-lime-600 mb-8 text-center">
           {editingArticleId ? 'Edit Article' : 'Create Article'}
