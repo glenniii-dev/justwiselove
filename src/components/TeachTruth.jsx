@@ -64,7 +64,7 @@ const TeachTruth = () => {
                       <div className="font-['Barlow'] text-white leading-relaxed">
                         <span className="text-white">Answers:</span>
                         {answersP.map((p, index) => (
-                          <p key={index} className="text-zinc-900 hover:text-white">
+                          <p key={index} className="text-zinc-900 hover:text-white" onClick={e => e.target.style.color = "white"}>
                             {p.trim()}
                             <br /><br />
                           </p>
