@@ -30,7 +30,7 @@ function FamilyWorship() {
     const itemDate = new Date(family[i].D);
 
     const endOfWeek = new Date(itemDate);
-    endOfWeek.setDate(itemDate.getDate() - 6);
+    endOfWeek.setDate(itemDate.getDate() + 1);
 
     if (today >= itemDate && today <= endOfWeek) {
       currentWeek = family[i];
@@ -60,7 +60,7 @@ function FamilyWorship() {
           <>
             {renderWeekContent(currentWeek)}
 
-            {futureWeeks.length > 0 && ( 
+            {futureWeeks.length > 0 && (
               <button
                 onClick={() => setShowFutureWeeks(!showFutureWeeks)}
                 className="w-50 mx-auto px-6 py-3 bg-zinc-800 text-white rounded-lg hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-lime-600 transition duration-200 ease-in-out shadow-md font-medium"
