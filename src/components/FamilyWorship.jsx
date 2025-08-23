@@ -30,7 +30,7 @@ function FamilyWorship() {
     const itemDate = new Date(family[i].D);
 
     const endOfWeek = new Date(itemDate);
-    endOfWeek.setDate(itemDate.getDate() + 1);
+    endOfWeek.setDate(itemDate.getDate() + 3);
 
     if (today >= itemDate && today <= endOfWeek) {
       currentWeek = family[i];
