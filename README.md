@@ -1,0 +1,35 @@
+mern-project/                  # Root project folder (e.g., my-blog-app)
+├── client/                    # React frontend (run with npm run dev)
+│   ├── public/                # Static assets (e.g., index.html, favicon)
+│   │   └── index.html
+│   ├── src/                   # All source code
+│   │   ├── components/        # Reusable UI components (e.g., Button.jsx, Navbar.jsx)
+│   │   │   ├── common/        # Shared UI (e.g., Modal.jsx)
+│   │   │   └── forms/         # Form-specific (e.g., LoginForm.jsx)
+│   │   ├── pages/             # Page-level components (e.g., Home.jsx, BlogList.jsx)
+│   │   ├── hooks/             # Custom React hooks (e.g., useAuth.js, useFetch.js)
+│   │   ├── context/           # React Context for global state (e.g., AuthContext.js)
+│   │   ├── utils/             # Helper functions (e.g., api.js for Axios/fetch, validators.js)
+│   │   ├── styles/            # Global CSS/SCSS (e.g., globals.css)
+│   │   ├── App.jsx            # Main app component (routing, providers)
+│   │   └── main.jsx           # Entry point (renders App to DOM)
+│   ├── .env                   # Frontend env vars (e.g., VITE_API_URL=http://localhost:5000)
+│   ├── .gitignore
+│   ├── package.json           # Dependencies (react, react-dom, react-router-dom, axios)
+│   └── vite.config.js         # Vite config (plugins, proxy for backend API)
+├── server/                    # Node.js/Express backend (run with npm start)
+│   ├── config/                # Configuration files
+│   │   └── database.js        # MongoDB connection (using mongoose.connect)
+│   ├── controllers/           # Business logic handlers (e.g., authController.js, blogController.js)
+│   ├── models/                # MongoDB schemas (e.g., User.js, Blog.js with Mongoose)
+│   ├── routes/                # API routes (e.g., auth.js, blogs.js with express.Router)
+│   ├── middlewares/           # Custom middleware (e.g., auth.js for JWT, errorHandler.js)
+│   ├── utils/                 # Server utilities (e.g., email.js, validators.js with Joi/Zod)
+│   ├── .env                   # Backend env vars (e.g., MONGO_URI, JWT_SECRET, PORT=5000)
+│   ├── .gitignore
+│   ├── package.json           # Dependencies (express, mongoose, dotenv, cors, bcryptjs, jsonwebtoken)
+│   └── server.js              # Entry point (app setup, middleware, route mounting, server.listen)
+├── .gitignore                 # Root-level ignores (node_modules, .env)
+├── README.md                  # Project docs (setup, run instructions, tech stack)
+└── package.json               # Optional monorepo root (if using tools like TurboRepo)
+```

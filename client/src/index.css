@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+html {
+  font-family: 'Smooch Sans', sans-serif;
+  font-size: 17px;
+}
+
+@theme {
+  --color-green: #008000;
+  --color-smoke: #A9A9A9;
+  --color-stone: #565656;
+}

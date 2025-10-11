@@ -1,0 +1,27 @@
+What is react-router-dom?
+
+react-router-dom is a library for React that allows you to implement routing in a web application. Routing means showing different UI components based on the URL in the browser. Without routing, React apps would just be single-page applications that show the same component regardless of the URL.
+
+react-router-dom is specifically for web apps (there’s also react-router-native for React Native apps).
+
+* `<BrowserRouter>` is a **context provider for routing**. Any `<Routes>` or `<Link>` inside your app will now work correctly.
+* ✅ This is **required** if you want to use React Router.
+
+---
+
+### **3. Correct Approach**
+
+You **can wrap `<BrowserRouter>` inside `<StrictMode>`** instead of replacing it:
+
+* This way, you **keep the benefits of StrictMode** while enabling routing.
+* StrictMode is **development-only**; it won’t affect production builds.
+
+---
+
+### **4. Key Notes**
+
+* `<BrowserRouter>` must **wrap any `<Routes>` components** somewhere above them in the tree.
+* `<StrictMode>` can wrap `<BrowserRouter>`—it doesn’t interfere.
+* Removing `<StrictMode>` isn’t fatal, but you lose its helpful warnings during development.
+
+Backend start by adding a server.js then run: npm init THEN install: npm i express mongoose cors dotenv jsonwebtoken THEN: npm i nodemon --save-dev THEN IN THE package.json change type to module. Replace the test script with: "server": "nodemon server.js",
