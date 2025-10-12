@@ -4,6 +4,14 @@
   display: none; /* Hide All Scrollbars */
 }
 
+img {
+  -webkit-user-drag: none; /* Prevents dragging on WebKit browsers */
+  user-drag: none; /* Standard property for broader support */
+  -webkit-user-select: none; /* Prevents selection on WebKit browsers */
+  user-select: none; /* Standard property */
+  pointer-events: none; /* Disables mouse events like clicking and dragging */
+}
+
 html {
   font-family: 'Smooch Sans', sans-serif;
   font-size: 17px;

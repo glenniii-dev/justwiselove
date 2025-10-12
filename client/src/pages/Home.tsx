@@ -5,7 +5,7 @@ import Header from "../components/shared/Header";
 
 export default function Home() {
   return (
-    <div className="bg-stone-300 min-h-screen">
+    <div className="bg-stone-200 min-h-screen">
       <Header />
       <Hero />
       <Articles />
