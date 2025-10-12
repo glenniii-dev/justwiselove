@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+::-webkit-scrollbar {
+  display: none; /* Hide All Scrollbars */
+}
+
 html {
   font-family: 'Smooch Sans', sans-serif;
   font-size: 17px;

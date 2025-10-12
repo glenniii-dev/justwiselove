@@ -3,7 +3,7 @@ export default function Hero() {
     <section className='flex flex-col items-center justify-center border-t-[1px] border-white py-40 px-10 sm:px-20 w-screen bg-radial from-stone-700 to-stone-800 text-white'>
       <h1 className="text-6xl md:text-7xl font-semibold sm:leading-16">Live your <span className="text-green"> best</span> life now</h1>
 
-        <p className="my-6 sm:my-8 max-w-2xl m-auto text-lg md:px-18 lg:px-20 md:text-xl mx-auto text-justify">This is your space to thing out loud, to share what matters, and to write without filters. Whether it's one word or a thousand, your story starts right here</p>
+        <p className="my-6 sm:my-8 max-w-2xl m-auto text-lg md:px-18 lg:px-20 md:text-xl mx-auto text-justify">Find answers to what matters most. Discover a path of purpose, values, and a better way to life. Start your journey to a life transformed with true fulfillment.</p>
 
         <form className="flex justify-between w-90 lg:w-100 max-sm:scale-75 border border-gray-300 bg-transparent rounded-lg overflow-hidden text-lg">
           <input type="text" placeholder="Search for blogs" required className="w-full pl-4 outline-none" />
