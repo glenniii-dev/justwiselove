@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const commentSchema = new mongoose.Schema({
-  blog : {
+  article : {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Blog',
+    ref: "Article",
     required: true
   },
   name: {
@@ -20,4 +20,4 @@ const commentSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-export default mongoose.model('Comment', commentSchema);
+export default mongoose.model("Comment", commentSchema);

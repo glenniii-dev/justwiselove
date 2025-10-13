@@ -3,29 +3,54 @@ import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import Article from "../models/Article.js";
 import Comment from "../models/Comment.js";
-import type { Request, Response, NextFunction } from 'express';
+import type { Request, Response } from "express";
+
+export const userRegistration = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.json({ success: false, message: "Email already registered" });
+    }
+
+    const user = await User.create({ email, password });
+
+    res.json({
+      success: true,
+      message: "Registration successful. Awaiting admin approval."
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.json({ success: false, message: error.message });
+    } else {
+      res.json({ success: false, message: "Unknown error" });
+    }
+  }
+};
 
 export const adminLogin = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
+    const user = await User.findOne({ email });
 
-    // Find the admin in the database
-    const admin = await User.findOne({ email });
-    if (!admin) {
+    if (!user) {
       return res.json({ success: false, message: "Invalid credentials" });
     }
 
-    // Compare provided password with hashed password in DB
-    const isMatch = await bcrypt.compare(password, admin.password);
+    if (!user.isApproved) {
+      return res.json({ success: false, message: "Account not approved yet" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.json({ success: false, message: "Invalid credentials" });
     }
 
-    // Generate JWT token
     const token = jwt.sign(
-      { id: admin._id, email: admin.email },
+      { id: user._id, email: user.email, role: user.role },
       process.env.JWT_SECRET as string,
-      { expiresIn: "7d" } // optional expiration time
+      { expiresIn: "7d" }
     );
 
     res.json({ success: true, token });
@@ -33,7 +58,51 @@ export const adminLogin = async (req: Request, res: Response) => {
     if (error instanceof Error) {
       res.json({ success: false, message: error.message });
     } else {
-      console.log('An unknown error occurred');
+      res.json({ success: false, message: "Unknown error" });
+    }
+  }
+};
+
+export const approveUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.body;
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { isApproved: true, role: "admin" },
+      { new: true }
+    );
+
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    res.json({ success: true, message: `${user.email} is now an admin.` });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.json({ success: false, message: error.message });
+    } else {
+      res.json({ success: false, message: "Unknown error" });
+    }
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.body;
+
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
+
+    res.json({ success: true, message: `${user.name} has been deleted.` });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.json({ success: false, message: error.message });
+    } else {
+      res.json({ success: false, message: "An unknown error occurred" });
     }
   }
 };
@@ -46,7 +115,7 @@ export const getAllArticlesAdmin = async (req: Request, res: Response) => {
     if (error instanceof Error) {
       res.json({ success: false, message: error.message });
     } else {
-      console.log('An unknown error occurred');
+      console.log("An unknown error occurred");
     }
   }
 };
@@ -61,10 +130,23 @@ export const getAllComments = async (req: Request, res: Response) => {
     if (error instanceof Error) {
       res.json({ success: false, message: error.message });
     } else {
-      console.log('An unknown error occurred');
+      console.log("An unknown error occurred");
     }
   }
 };
+
+export const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await User.find({});
+    res.json({ success: true, users });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.json({ success: false, message: error.message });
+    } else {
+      console.log("An unknown error occurred");
+    }
+  }
+}
 
 export const getDashboard = async (req: Request, res: Response) => {
   try {
@@ -87,7 +169,7 @@ export const getDashboard = async (req: Request, res: Response) => {
     if (error instanceof Error) {
       res.json({ success: false, message: error.message });
     } else {
-      console.log('An unknown error occurred');
+      console.log("An unknown error occurred");
     }
   }
 };
@@ -101,7 +183,7 @@ export const deleteCommentById = async (req: Request, res: Response) => {
     if (error instanceof Error) {
       res.json({ success: false, message: error.message });
     } else {
-      console.log('An unknown error occurred');
+      console.log("An unknown error occurred");
     }
   }
 };
@@ -115,7 +197,7 @@ export const approveCommentById = async (req: Request, res: Response) => {
     if (error instanceof Error) {
       res.json({ success: false, message: error.message });
     } else {
-      console.log('An unknown error occurred');
+      console.log("An unknown error occurred");
     }
   }
 };
