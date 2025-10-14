@@ -13,7 +13,7 @@ export default function Footer() {
               </svg>
               <h1 className="font-bold text-3xl">Just Wise Love</h1>
             </div>
-            <p className="m-w-[410px] mt-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p className="max-w-[410px] mt-6">“And stop being molded by this system of things, but be transformed by making your mind over, so that you may prove to yourselves the good and acceptable and perfect will of God.” - Romans 12:2</p>
           </div>
 
           <div className="flex flex-row flex-wrap justify-between w-full md:w-[45%] gap-5">
@@ -23,7 +23,7 @@ export default function Footer() {
                 <ul className="text-sm space-y-1">
                   {section.links.map((link, i) => (
                     <li key={i}>
-                      <a href="#" className="hover:underline transition">{link}</a>
+                      <a href={link.link} className="hover:underline transition">{link.title}</a>
                     </li>
                   ))}
                 </ul>
