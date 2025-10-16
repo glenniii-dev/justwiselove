@@ -1,0 +1,133 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  color: var(--stone);
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 120px;
+    padding-bottom: 50px;
+    background: radial-gradient(circle at center, var(--white), var(--grey), var(--grey));
+
+    h1 {
+      font-size: 80px;
+      font-weight: 600;
+      margin: 0;
+  
+      span {
+        color: var(--green);
+      }
+    }
+  
+    p {
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 30px;
+      margin-top: 20px;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 450px;
+      height: 60px;
+      border: 1px solid var(--stone);
+      border-radius: 6px;
+      margin-top: 15px;
+      padding: 0 4px;
+
+      input {
+        width: 100%;
+        border: none;
+        padding: 5px 12px;
+        background-color: transparent;
+        font-family: 'Smooch Sans', sans-serif;
+        font-size: 20px;
+      }
+
+      button {
+        width: 150px;
+        height: 50px;
+        border: none;
+        border-radius: 6px;
+        background-color: var(--stone);
+        color: var(--white);
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: 'Smooch Sans', sans-serif;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+    
+}
+
+@media (max-width: 900px) {
+  main {
+    .hero {
+      padding: 70px 0;
+      h1 {
+        font-size: 60px;
+      }
+      p {
+        font-size: 22px;
+        line-height: 28px;
+        max-width: 400px;
+      }
+      form {
+        width: 350px;
+        height: 50px;
+        input {
+          font-size: 18px;
+        }
+        button {
+          width: 120px;
+          height: 40px;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  main {
+    .hero {
+      padding: 50px 0;
+      h1 {
+        font-size: 40px;
+      }
+      p {
+        font-size: 17px;
+        line-height: 25px;
+        max-width: 300px;
+      }
+      form {
+        width: 280px;
+        height: 40px;
+        input {
+          font-size: 15px;
+        }
+        button {
+          width: 100px;
+          height: 30px;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}

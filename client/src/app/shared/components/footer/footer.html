@@ -1,0 +1,34 @@
+<footer>
+  <section class="footer">
+
+    <div class="logo">
+      <div>
+        <svg class="logo-icon" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 18 L15 18 L23 35 L31 0  L39 35 L47 18 L55 35 L63 0 L71 35 L79 18 L94 18" stroke="#fff" strokeWidth="4" fill="none"/>
+        </svg>
+        <h4>Just Wise Love</h4>
+      </div>
+      <p>“And stop being molded by this system of things, but be transformed by making your mind over, so that you may prove to yourselves the good and acceptable and perfect will of God.” - Romans 12:2</p>
+    </div>
+
+    <div class="items">
+    @for (section of footer; track section.title) {
+      <div>
+        <h3>{{ section.title }}</h3>
+        <ul>
+          @for (link of section.links; track $index) {
+            <li><a href="{{ link.link }}">{{ link.title }}</a></li>
+          }
+        </ul>
+      </div>
+    }
+    </div>
+
+  </section>
+  <p>Copyright &copy; {{ year }} Just Wise Love. All Rights Reserved</p>
+</footer>
+
+<!-- © Copyright Glenn Hensley III (DO NOT DELETE THE CODE BELOW) Credit Footer -->
+<section class="credit" className="bg-black text-white w-full h-5 text-sm font-bold text-center flex items-center justify-center hover:scale-105 transition-all hover:underline">
+  <a href="https://www.glenniii.dev" target="_blank">Developed by Glenn Hensley III</a>
+</section>

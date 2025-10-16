@@ -1,0 +1,62 @@
+src/app/
+├── core/                     # Singleton services, guards, interceptors
+│   ├── services/
+│   │   ├── api.service.ts
+│   │   └── auth.service.ts
+│   ├── guards/
+│   │   └── auth.guard.ts
+│   ├── interceptors/
+│   │   └── token.interceptor.ts
+│   └── core.module.ts
+│
+├── shared/                   # Reusable components, pipes, directives
+│   ├── components/
+│   │   ├── navbar/
+│   │   ├── footer/
+│   │   └── card/
+│   ├── pipes/
+│   │   └── truncate.pipe.ts
+│   ├── directives/
+│   │   └── highlight.directive.ts
+│   └── shared.module.ts
+│
+├── features/
+│   ├── home/                 # Landing/home page
+│   │   ├── pages/
+│   │   │   └── home-page/
+│   │   │       ├── home-page.component.ts
+│   │   │       ├── home-page.component.html
+│   │   │       └── home-page.component.scss
+│   │   ├── home-routing.module.ts
+│   │   └── home.module.ts
+│   │
+│   ├── blog/
+│   │   ├── components/
+│   │   │   ├── blog-card/
+│   │   │   └── comment-list/
+│   │   ├── pages/
+│   │   │   ├── blog-list-page/      # Can also serve as home page if desired
+│   │   │   └── blog-detail-page/
+│   │   ├── blog-routing.module.ts
+│   │   └── blog.module.ts
+│   │
+│   ├── admin/
+│   │   ├── components/
+│   │   │   ├── post-form/
+│   │   │   └── post-table/
+│   │   ├── pages/
+│   │   │   ├── admin-dashboard-page/
+│   │   │   └── manage-posts-page/
+│   │   ├── admin-routing.module.ts
+│   │   └── admin.module.ts
+│   │
+│   └── auth/
+│       ├── pages/
+│       │   ├── login-page/
+│       │   └── register-page/
+│       ├── auth-routing.module.ts
+│       └── auth.module.ts
+│
+├── app-routing.module.ts      # Lazy-loads features
+└── app.component.ts           # Root component
+s
