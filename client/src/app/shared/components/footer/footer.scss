@@ -134,10 +134,20 @@ footer {
       .items {
         margin-top: 0;
         padding-bottom: 10px;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 100%;
+
+        div {
+          flex: 1 1 auto;
+          margin: 0 5px;
+          min-width: 80px;
+        }
 
         ul {
-          flex-direction: row;
-          flex-wrap: wrap;
+          flex-direction: column;
         }
       }
     }
