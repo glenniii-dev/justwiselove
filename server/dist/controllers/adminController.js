@@ -5,12 +5,12 @@ import Article from "../models/Article.js";
 import Comment from "../models/Comment.js";
 export const userRegistration = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { name, email, password } = req.body;
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.json({ success: false, message: "Email already registered" });
         }
-        const user = await User.create({ email, password });
+        const user = await User.create({ name, email, password });
         res.json({
             success: true,
             message: "Registration successful. Awaiting admin approval."

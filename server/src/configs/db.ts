@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    if (!process.env.MONGODB_URL) {
-      throw new Error("❌ MONGODB_URL is not defined in .env");
+    if (!process.env.MONGODB_URI) {
+      throw new Error("❌ MONGODB_URI is not defined in .env");
     }
 
     // Use dbName option for clarity and flexibility
-    await mongoose.connect(process.env.MONGODB_URL, {
+    await mongoose.connect(process.env.MONGODB_URI, {
       dbName: "justwiselove",
     });
 

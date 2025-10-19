@@ -7,14 +7,14 @@ import type { Request, Response } from "express";
 
 export const userRegistration = async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.json({ success: false, message: "Email already registered" });
     }
 
-    const user = await User.create({ email, password });
+    const user = await User.create({ name, email, password });
 
     res.json({
       success: true,

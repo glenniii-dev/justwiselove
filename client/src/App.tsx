@@ -2,6 +2,7 @@ import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Article from "./pages/Article";
+import Register from "./pages/Register";
 import Layout from "./pages/admin/Layout";
 import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
@@ -19,6 +20,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/article:id" element={<Article />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/admin" element={token ? <Layout /> : <Login />}>
           <Route index element={<Dashboard />} />
           <Route path="addArticle" element={<AddArticle />} />

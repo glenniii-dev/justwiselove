@@ -15,4 +15,4 @@ const auth = (req, res, next) => {
     }
 };
 export default auth;
-//# sourceMappingURL=auth.js.map
+//# sourceMappingURL=Auth.js.map
