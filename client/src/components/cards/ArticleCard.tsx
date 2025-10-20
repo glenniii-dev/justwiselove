@@ -25,7 +25,8 @@ const ArticleCard = ({ article }: { article: Article }) => {
       <span className="ml-5 mt-4 px-3 py-1 inline-block bg-stone-800 rounded-sm text-white text-xs font-bold">{category as string}</span>
       <div className="p-5">
         <h5 className="mb-2 font-medium text-stone-800 text-2xl">{title}</h5>
-        <p className="mb-3 text-lg text-stone-800" dangerouslySetInnerHTML={{"__html": content.slice(0, 80)}}></p>
+        <p className="mb-3 text-lg text-stone-800" dangerouslySetInnerHTML={{
+    __html: `${content.slice(0, 50)}${content.length === 50 ? "..." : ""}`}}></p>
       </div>
     </div>
   )

@@ -6,11 +6,13 @@ import Register from "./pages/Register";
 import Layout from "./pages/admin/Layout";
 import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
-import AddArticle from "./pages/admin/AddArticle";
+import Create from "./pages/admin/Create";
 import AllArticles from "./pages/admin/AllArticles";
 import Comments from "./pages/admin/Comments";
 import Users from "./pages/admin/Users";
 import { useAuth } from "./context/auth/useAuth";
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import "quill/dist/quill.snow.css";
 
 export default function App() {
   const { token } = useAuth();
@@ -19,11 +21,11 @@ export default function App() {
       <Toaster />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/article:id" element={<Article />} />
+        <Route path="/article/:id" element={<Article />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={token ? <Layout /> : <Login />}>
           <Route index element={<Dashboard />} />
-          <Route path="addArticle" element={<AddArticle />} />
+          <Route path="create" element={<Create />} />
           <Route path="allArticles" element={<AllArticles />} />
           <Route path="comments" element={<Comments />} />
           <Route path="users" element={<Users />} />

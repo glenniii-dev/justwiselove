@@ -52,18 +52,18 @@ const footer = [
   {
       title: "Need Help?",
       links: [
-      {
-        title: "FAQ", 
-        link: "FAQ" 
-      },
-      {
-        title: "Support", 
-        link: "Support", 
-      },
-      {
-        title: "Contact Us", 
-        link: "Contact Us"
-      }
+        {
+          title: "Admin", 
+          link: "/admin" 
+        },
+        {
+        title: "Register", 
+        link: "/register", 
+        },
+        {
+          title: "Contact Us", 
+          link: "mailto:justwiselove@icloud.com"
+        }
     ]
   }
 ];

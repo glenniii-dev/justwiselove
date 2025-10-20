@@ -123,7 +123,7 @@ export const getAllArticlesAdmin = async (req: Request, res: Response) => {
 export const getAllComments = async (req: Request, res: Response) => {
   try {
     const comments = await Comment.find({})
-      .populate("articlr")
+      .populate("article")
       .sort({ createdAt: -1 });
     res.json({ success: true, comments });
   } catch (error) {

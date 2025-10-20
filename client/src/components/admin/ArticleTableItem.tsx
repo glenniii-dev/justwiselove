@@ -30,7 +30,7 @@ interface ConfirmDialogOptions {
   closeOnClickOutside?: boolean;
 }
 
-function ArticleTableItem({ article, fetchArticles, index }: TableData) {
+export default function ArticleTableItem({ article, fetchArticles, index }: TableData) {
   const token = localStorage.getItem("token");
   const { axios } = useArticle();
   const { title, createdAt } = article;
@@ -63,7 +63,7 @@ function ArticleTableItem({ article, fetchArticles, index }: TableData) {
     if (!confirmed) return;
 
     try {
-      const { data } = await axios.delete(`/api/article/delete/`, {
+      const { data } = await axios.delete(`/api/articles/delete`, {
         data: { id: article._id },
         headers: { token },
       });
@@ -81,7 +81,7 @@ function ArticleTableItem({ article, fetchArticles, index }: TableData) {
 
   const togglePublish = async () => {
     try {
-      const { data } = await axios.post(`/api/blog/toggle-publish`, { id: article._id });
+      const { data } = await axios.post(`/api/articles/toggle-publish`, { id: article._id });
       if (data.success) {
         toast.success(data.message);
         await fetchArticles();
@@ -98,28 +98,27 @@ function ArticleTableItem({ article, fetchArticles, index }: TableData) {
   };
 
   return (
-    <tr className="border-y border-gray-300">
+    <tr className="border-y border-gray-300 text-md font-medium">
       <th className="px-2 py-4">{index}</th>
-      <td className="px-2 py-4 max-md:max-w-35 word-wrap">{title}</td>
+      <td className="px-2 py-4 max-md:max-w-35 word-wrap">{ article.isPublished ?
+        ( <a href={`/article/${article._id}`} target="_blank" className="hover:underline">{title}</a>) : ( title) }</td>
       <td className="px-2 py-4 max-sm:hidden">{ArticleDate.toDateString()}</td>
       <td className="px-2 py-4 max-sm:hidden">
         <p className={`${article.isPublished ? "text-green-600" : "text-orange-700"}`}>
           {article.isPublished ? "Published" : "Draft"}
         </p>
       </td>
-      <td className="px-2 py-4 flex text-xs gap-3">
-        <button onClick={togglePublish} className="border px-2 py-0.5 mt-1 rounded cursor-pointer">
+      <td className="px-2 py-4 flex text-xs gap-3 items-center">
+        <button onClick={togglePublish} className="border px-2 py-0.5 mt-1 rounded cursor-pointer font-bold">
           {article.isPublished ? "Unpublish" : "Publish"}
         </button>
         <img
           onClick={deleteArticle}
-          src="/assets/cross.svg"
-          alt="cross icon"
-          className="w-8 hover:scale-110 transition-all cursor-pointer"
+          src="/assets/delete.png"
+          alt="delete icon"
+          className="w-5 h-5 hover:scale-110 transition-all cursor-pointer"
         />
       </td>
     </tr>
   );
 }
-
-export default ArticleTableItem;

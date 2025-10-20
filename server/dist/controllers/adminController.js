@@ -104,7 +104,7 @@ export const getAllArticlesAdmin = async (req, res) => {
 export const getAllComments = async (req, res) => {
     try {
         const comments = await Comment.find({})
-            .populate("articlr")
+            .populate("article")
             .sort({ createdAt: -1 });
         res.json({ success: true, comments });
     }

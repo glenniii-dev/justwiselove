@@ -55,7 +55,7 @@ export default function Dashboard() {
       <div className="flex flex-wrap gap-4">
         
         <div className="flex items-center gap-4 bg-white p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
-          <img src="/assets/dashboard_icon_1.svg" alt="article data icon" />
+          <img src="/assets/articles.png" alt="articles icon" className="h-10" />
           <div>
             <p className="text-xl font-semibold text-gray-600">{dashboardData.totalArticles}</p>
             <p className="text-gray-400 font-light">Articles</p>
@@ -63,7 +63,7 @@ export default function Dashboard() {
         </div>
 
         <div className="flex items-center gap-4 bg-white p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
-          <img src="/assets/dashboard_icon_2.svg" alt="comment data icon" />
+          <img src="/assets/comments.png" alt="comment data icon" className="h-10" />
           <div>
             <p className="text-xl font-semibold text-gray-600">{dashboardData.totalComments}</p>
             <p className="text-gray-400 font-light">Comments</p>
@@ -71,7 +71,7 @@ export default function Dashboard() {
         </div>
 
         <div className="flex items-center gap-4 bg-white p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
-          <img src="/assets/dashboard_icon_3.svg" alt="draft data icon" />
+          <img src="/assets/create.png" alt="create icon" className="h-10" />
           <div>
             <p className="text-xl font-semibold text-gray-600">{dashboardData.totalDrafts}</p>
             <p className="text-gray-400 font-light">Drafts</p>
@@ -81,8 +81,7 @@ export default function Dashboard() {
 
       <div>
         <div className="flex items-center gap-3 m-4 mt-6 text-gray-600">
-          <img src="/assets/dashboard_icon_4.svg" alt="latest article data icon" />
-          <p>Articles Blogs</p>
+          <p className="text-2xl font-semibold">Recent Articles</p>
         </div>
         
         <div className="relative max-w-4xl overflow-x-auto shadow rounded-lg scrollbar-hide bg-white mb-4">

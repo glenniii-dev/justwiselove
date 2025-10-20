@@ -20,10 +20,10 @@ export default function Footer() {
             {footer.map((section, index) => (
               <div key={index}>
                 <h3 className="font-bold text-base text-white md:mb-5 mb-2">{section.title}</h3>
-                <ul className="text-sm space-y-1">
+                <ul className="text-md space-y-1">
                   {section.links.map((link, i) => (
                     <li key={i}>
-                      <a href={link.link} className="hover:underline transition">{link.title}</a>
+                      <a href={link.link} className="hover:underline hover:decoration-green">{link.title}</a>
                     </li>
                   ))}
                 </ul>
