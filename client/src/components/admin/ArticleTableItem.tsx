@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
 import { useArticle } from "../../context/article/useArticle";
+import { useNavigate } from "react-router-dom";
 import { confirmAlert } from "react-confirm-alert";
 
 interface Category {
@@ -33,6 +34,7 @@ interface ConfirmDialogOptions {
 export default function ArticleTableItem({ article, fetchArticles, index }: TableData) {
   const token = localStorage.getItem("token");
   const { axios } = useArticle();
+  const navigate = useNavigate();
   const { title, createdAt } = article;
   const ArticleDate = new Date(createdAt);
 
@@ -101,7 +103,14 @@ export default function ArticleTableItem({ article, fetchArticles, index }: Tabl
     <tr className="border-y border-gray-300 text-md font-medium">
       <th className="px-2 py-4">{index}</th>
       <td className="px-2 py-4 max-md:max-w-35 word-wrap">{ article.isPublished ?
-        ( <a href={`/article/${article._id}`} target="_blank" className="hover:underline">{title}</a>) : ( title) }</td>
+        ( <a href={`/article/${article._id}`} target="_blank" className="hover:underline">{title}</a>) : (
+          <button
+            onClick={() => navigate('/admin/create', { state: { article } })}
+            className="text-left hover:underline"
+          >
+            {title}
+          </button>
+        ) }</td>
       <td className="px-2 py-4 max-sm:hidden">{ArticleDate.toDateString()}</td>
       <td className="px-2 py-4 max-sm:hidden">
         <p className={`${article.isPublished ? "text-green-600" : "text-orange-700"}`}>

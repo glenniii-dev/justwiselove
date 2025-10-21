@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Quill from "quill";
 import { useArticle } from "../../context/article/useArticle";
 import categories from "../../utils/categories";
@@ -17,6 +18,17 @@ function Create() {
   const [subtitle, setSubtitle] = useState('');
   const [category, setCategory] = useState('');
   const [isPublished, setIsPublished] = useState(false);
+  const location = useLocation();
+
+  type ArticleState = {
+    article?: {
+      title?: string;
+      subtitle?: string;
+      content?: string;
+      category?: string | { category: string };
+      isPublished?: boolean;
+    }
+  }
 
   const onSubmitHandler = async (e: React.FormEvent) => {
     try {
@@ -87,8 +99,23 @@ function Create() {
       quillRef.current = new Quill(editorRef.current, {
         theme: "snow",
       })
+      // If navigation provided an article in state, populate fields and editor
+      const state = (location && (location.state as ArticleState)) || {};
+      const incoming = state.article;
+      if (incoming) {
+        setTitle(incoming.title || '');
+        setSubtitle(incoming.subtitle || '');
+        setCategory(typeof incoming.category === 'string' ? incoming.category : (incoming.category?.category ?? ''));
+        setIsPublished(!!incoming.isPublished);
+        // set editor content after a tick to ensure quill initialized
+        setTimeout(() => {
+          if (quillRef.current && quillRef.current.root) {
+            quillRef.current.root.innerHTML = incoming.content || '';
+          }
+        }, 0);
+      }
     }
-  }, [])
+  }, [location])
 
   return (
     <form onSubmit={onSubmitHandler} className="h-full w-full sm:max-w-[600px] md:max-w-2xl lg:max-w-3xl flex flex-col text-stone-600 overflow-scroll">
