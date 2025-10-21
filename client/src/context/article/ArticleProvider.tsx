@@ -23,7 +23,6 @@ export const ArticleProvider = ({ children }: { children: ReactNode }) => {
   const fetchArticles = async () => {
     try {
       const { data } = await axios.get("/api/articles/all");
-      console.log(data.articles);
       if (data.success) {
         setArticles(data.articles);
       } else {

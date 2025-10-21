@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Quill from "quill";
 import { useArticle } from "../../context/article/useArticle";
-import categories from "../../utils/categories";
+import { articleCategories } from "../../utils/categories";
 import toast from "react-hot-toast";
 
 function Create() {
@@ -13,6 +13,7 @@ function Create() {
 
   const editorRef = useRef<HTMLDivElement | null>(null);
   const quillRef = useRef<Quill | null>(null);
+  const categories = articleCategories;
 
   const [title, setTitle] = useState('');
   const [subtitle, setSubtitle] = useState('');
@@ -45,8 +46,6 @@ function Create() {
 
       const formData = new FormData();
       formData.append('article', JSON.stringify(article));
-
-      console.log({ title, subtitle, content: quillRef.current?.root.innerHTML, category, isPublished });
 
       const payload = {
         article: JSON.stringify({
@@ -135,7 +134,7 @@ function Create() {
         <p className="mt-4 font-bold">Category</p>
         <select onChange={(e) => setCategory(e.target.value)} name="category" className="mt-2 px-3 py-2 border text-stone-500 border-stone-300 outline-none rounded">
           <option value="">Select category</option>
-          {categories.map((category, index) => {
+          {categories.map((category: { category: string }, index: number) => {
             return (
               <option key={index} value={category.category}>{category.category}</option>
             )

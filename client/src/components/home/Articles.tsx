@@ -1,5 +1,5 @@
 import { useState } from "react";
-import categories from "../../utils/categories";
+import { categories } from "../../utils/categories";
 import ArticleCard from "../cards/ArticleCard";
 import { useArticle } from "../../context/article/useArticle";
 
@@ -42,13 +42,13 @@ export default function Articles() {
     });
   };
 
-  const selectedCategory = categories.find((cat) => cat.category === menu);
+  const selectedCategory =  categories.find((cat) => cat.category === menu);
 
   return (
     <div>
       {/* Category Menu */}
       <div className="flex justify-center gap-4 sm:gap-8 mt-10 flex-wrap relative px-10 sm:px-20">
-        {categories.map((category: Category) => (
+        { categories.map((category: Category) => (
           <div key={category.category} className="relative">
             <button
               onClick={() => setMenu(category.category)}

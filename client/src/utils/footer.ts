@@ -23,8 +23,8 @@ const footer = [
         link: "/", 
       },
       {
-        title: "Articles", 
-        link: "/articles", 
+        title: "Family", 
+        link: "/family", 
       },
       {
         title: "About Us", 

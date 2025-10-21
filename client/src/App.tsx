@@ -13,6 +13,7 @@ import Users from "./pages/admin/Users";
 import { useAuth } from "./context/auth/useAuth";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import "quill/dist/quill.snow.css";
+import Family from "./pages/Family";
 
 export default function App() {
   const { token } = useAuth();
@@ -22,6 +23,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/article/:id" element={<Article />} />
+        <Route path='/family' element={<Family />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={token ? <Layout /> : <Login />}>
           <Route index element={<Dashboard />} />
