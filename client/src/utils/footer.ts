@@ -37,15 +37,15 @@ const footer = [
     links: [
     {
         title: "Gods Name", 
-        link: "Gods Name"
+        link: "/article/68fa18c8c1f2adf7fd93ca03"
     },
     {
-        title: "The Kingdom", 
-        link: "The Kingdom"
+        title: "His Kingdom", 
+        link: "/article/68fa2ba81c634f05838225d2"
     },
     {
         title: "Will Be Done", 
-        link: "Will Be Done"
+        link: "/article/68fa3120870f24acf75958dd"
     }
     ]
   },

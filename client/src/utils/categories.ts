@@ -1,6 +1,6 @@
 const categories = [
   {
-    category: "All",
+    category: "Index",
     description: null
   },
   {

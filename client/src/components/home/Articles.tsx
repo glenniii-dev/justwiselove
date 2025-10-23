@@ -19,7 +19,7 @@ interface Article {
 }
 
 export default function Articles() {
-  const [menu, setMenu] = useState("All");
+  const [menu, setMenu] = useState("Index");
   const { articles, input } = useArticle();
 
   const filteredArticles = () => {
@@ -66,7 +66,7 @@ export default function Articles() {
         <div className="flex flex-col mx-auto">
         {selectedCategory?.category && (
           <h1 className="text-green text-2xl font-bold mb-3 text-left max-w-160">
-            {selectedCategory.category !== "All" && selectedCategory.category.toUpperCase()}
+            {selectedCategory.category !== "Index" && selectedCategory.category.toUpperCase()}
           </h1>
         )}
         {selectedCategory?.description && (
@@ -86,7 +86,7 @@ export default function Articles() {
                 ? article.category
                 : article.category.category;
 
-            return menu === "All" ? true : categoryName === menu;
+            return menu === "Index" ? true : categoryName === menu;
           })
           .map((article: Article) => (
             <ArticleCard key={article._id} article={article} />

@@ -14,6 +14,7 @@ import { useAuth } from "./context/auth/useAuth";
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import "quill/dist/quill.snow.css";
 import Family from "./pages/Family";
+import AboutUs from "./pages/AboutUs";
 
 export default function App() {
   const { token } = useAuth();
@@ -24,6 +25,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/article/:id" element={<Article />} />
         <Route path='/family' element={<Family />} />
+        <Route path="/about-us" element={<AboutUs />} />
         <Route path="/register" element={<Register />} />
         <Route path="/admin" element={token ? <Layout /> : <Login />}>
           <Route index element={<Dashboard />} />
