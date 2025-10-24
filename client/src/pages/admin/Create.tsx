@@ -116,6 +116,19 @@ function Create() {
     }
   }, [location])
 
+  // Sync form field values with React state on component mount
+  useEffect(() => {
+    const titleInput = document.querySelector('input[type="text"]') as HTMLInputElement;
+    const subtitleInput = document.querySelector('input[placeholder="Enter your subtitle"]') as HTMLInputElement;
+    const categorySelect = document.querySelector('select[name="category"]') as HTMLSelectElement;
+    const publishCheckbox = document.querySelector('input[type="checkbox"]') as HTMLInputElement;
+
+    if (titleInput?.value) setTitle(titleInput.value);
+    if (subtitleInput?.value) setSubtitle(subtitleInput.value);
+    if (categorySelect?.value) setCategory(categorySelect.value);
+    if (publishCheckbox) setIsPublished(publishCheckbox.checked);
+  }, [])
+
   return (
     <form onSubmit={onSubmitHandler} className="h-full w-full sm:max-w-[600px] md:max-w-2xl lg:max-w-3xl flex flex-col text-stone-600 overflow-scroll">
       <div className="bg-white w-full max-w-3xl p-4 md:p-10 sm:m-10 shadow rounded">
