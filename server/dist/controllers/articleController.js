@@ -3,8 +3,9 @@ import Comment from "../models/Comment.js";
 export const addArticle = async (req, res) => {
     try {
         const { title, subtitle, content, category, isPublished } = JSON.parse(req.body.article);
-        // Check if all fields are present
-        if (!title || !subtitle || !content || !category || !isPublished) {
+        // Check required fields: title, content, category must be present.
+        // isPublished is a boolean and can be false, so explicitly check for undefined.
+        if (!title || !content || !category || typeof isPublished === 'undefined') {
             return res.json({ success: false, message: "Missing required fields" });
         }
         await Article.create({ title, subtitle, content, category, isPublished });
