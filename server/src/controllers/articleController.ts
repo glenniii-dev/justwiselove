@@ -7,8 +7,9 @@ export const addArticle = async (req: Request, res: Response) => {
   try {
     const { title, subtitle, content, category, isPublished } = JSON.parse(req.body.article);
 
-    // Check if all fields are present
-    if (!title || !subtitle || !content || !category || !isPublished) {
+    // Check required fields: title, content, category must be present.
+    // isPublished is a boolean and can be false, so explicitly check for undefined.
+    if (!title || !content || !category || typeof isPublished === 'undefined') {
       return res.json({ success: false, message: "Missing required fields" });
     }
 
