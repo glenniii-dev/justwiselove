@@ -28,7 +28,7 @@ export const addArticle = async (req: Request, res: Response) => {
 
 export const getAllArticles = async (req: Request, res: Response) => {
   try {
-    const articles = (await Article.find({ isPublished: true })).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    const articles = (await Article.find({ isPublished: true })).sort((a, b) => a.title.localeCompare(b.title));
     res.json({ success: true, articles });
 
   } catch (error) {

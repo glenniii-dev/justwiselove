@@ -22,24 +22,60 @@ export default function Articles() {
   const [menu, setMenu] = useState("Index");
   const { articles, input } = useArticle();
 
-  const filteredArticles = () => {
+  // Return an array of objects containing the article and optional preview/searchTerm
+  type DisplayArticle = { article: Article; preview?: string; searchTerm?: string };
+
+  const getDisplayedArticles = (): DisplayArticle[] => {
     if (!articles || !Array.isArray(articles)) return [];
 
-    if (input === "") {
-      return articles;
+    const stripHtml = (html: string) => {
+      const tmp = document.createElement("div");
+      tmp.innerHTML = html;
+      return tmp.textContent || tmp.innerText || "";
+    };
+
+    const searchTerm = input.trim().toLowerCase();
+
+    // If no search input, return articles without previews
+    if (searchTerm === "") {
+      return articles.map((a: Article) => ({ article: a }));
     }
 
-    return articles.filter((article: Article) => {
-      const categoryName =
-        typeof article.category === "string"
-          ? article.category
-          : article.category.category;
+    return articles
+      .map((article: Article) => {
+        const categoryName =
+          typeof article.category === "string"
+            ? article.category
+            : article.category.category;
 
-      return (
-        article.title.toLowerCase().includes(input.toLowerCase()) ||
-        categoryName.toLowerCase().includes(input.toLowerCase())
-      );
-    });
+        const titleMatch = article.title.toLowerCase().includes(searchTerm);
+        const categoryMatch = categoryName.toLowerCase().includes(searchTerm);
+
+        const plainContent = stripHtml(article.content);
+        const contentLower = plainContent.toLowerCase();
+        const contentMatch = contentLower.includes(searchTerm);
+
+        let preview: string | undefined = undefined;
+        if (contentMatch) {
+          const matchIndex = contentLower.indexOf(searchTerm);
+          const startIndex = Math.max(0, matchIndex - 50);
+          const endIndex = Math.min(contentLower.length, matchIndex + searchTerm.length + 50);
+          preview = plainContent.slice(startIndex, endIndex);
+          if (startIndex > 0) preview = "..." + preview;
+          if (endIndex < plainContent.length) preview += "...";
+        }
+
+        const matches = titleMatch || categoryMatch || contentMatch;
+        return { article, preview, searchTerm: matches ? searchTerm : undefined };
+      })
+      .filter((d) => d.article && (d.searchTerm !== undefined || d.preview !== undefined || true)) // keep articles then filter below by matches
+      .filter((d) => {
+        const catName = typeof d.article.category === "string" ? d.article.category : d.article.category.category;
+        const titleMatch = d.article.title.toLowerCase().includes(searchTerm);
+        const categoryMatch = catName.toLowerCase().includes(searchTerm);
+        const contentMatch = (d.preview || "").toLowerCase().includes(searchTerm);
+        return titleMatch || categoryMatch || contentMatch;
+      });
   };
 
   const selectedCategory =  categories.find((cat) => cat.category === menu);
@@ -79,8 +115,8 @@ export default function Articles() {
 
       {/* Article Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-8 mb-24 mx-8 sm:mx-16 2xl:mx-40">
-        {filteredArticles()
-          .filter((article: Article) => {
+        {getDisplayedArticles()
+          .filter(({ article }) => {
             const categoryName =
               typeof article.category === "string"
                 ? article.category
@@ -88,8 +124,8 @@ export default function Articles() {
 
             return menu === "Index" ? true : categoryName === menu;
           })
-          .map((article: Article) => (
-            <ArticleCard key={article._id} article={article} />
+          .map(({ article, preview, searchTerm }) => (
+            <ArticleCard key={article._id} article={article} preview={preview} searchTerm={searchTerm} />
           ))}
       </div>
     </div>

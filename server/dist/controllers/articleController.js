@@ -22,7 +22,7 @@ export const addArticle = async (req, res) => {
 };
 export const getAllArticles = async (req, res) => {
     try {
-        const articles = (await Article.find({ isPublished: true })).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        const articles = (await Article.find({ isPublished: true })).sort((a, b) => a.title.localeCompare(b.title));
         res.json({ success: true, articles });
     }
     catch (error) {

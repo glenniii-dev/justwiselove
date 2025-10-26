@@ -28,9 +28,7 @@ export default function AboutUs() {
             </div>
           </div>
           <div className="max-w-2xl px-10 py-15 mx-auto flex flex-col items-center justify-center gap-5 text-center">
-            <svg className="h-7" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0 18 L15 18 L23 35 L31 0  L39 35 L47 18 L55 35 L63 0 L71 35 L79 18 L94 18" stroke="#008000" strokeWidth="4" fill="none"/>
-            </svg>
+            <img src="/jwl.png" alt="jwl logo" className="h-7" />
             <p className="italic text-stone-500 font-medium">“For the word of God is alive and exerts power and is sharper than any two-edged sword...” — Hebrews 4:12</p>
 
           </div>

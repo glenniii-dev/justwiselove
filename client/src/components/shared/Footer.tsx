@@ -8,9 +8,7 @@ export default function Footer() {
           
           <div className="flex flex-col">
             <div className="flex flex-row items-center">
-              <svg className="w-20 mr-3" viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 18 L15 18 L23 35 L31 0  L39 35 L47 18 L55 35 L63 0 L71 35 L79 18 L94 18" stroke="#fff" strokeWidth="4" fill="none"/>
-              </svg>
+              <img src="/jwl.png" alt="jwl logo" className="w-20 mr-3" />
               <h1 className="font-bold text-3xl">Just Wise Love</h1>
             </div>
             <p className="max-w-[410px] mt-6">“And stop being molded by this system of things, but be transformed by making your mind over, so that you may prove to yourselves the good and acceptable and perfect will of God.” - Romans 12:2</p>

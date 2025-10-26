@@ -15,7 +15,7 @@ interface Article {
   isPublished: boolean;
 }
 
-const ArticleCard = ({ article }: { article: Article }) => {
+const ArticleCard = ({ article, preview, searchTerm }: { article: Article; preview?: string; searchTerm?: string }) => {
 
   const {title, subtitle, category, _id} = article;
   const navigate = useNavigate();
@@ -26,6 +26,19 @@ const ArticleCard = ({ article }: { article: Article }) => {
       <div className="p-5">
         <h5 className="mb-2 font-medium text-stone-800 text-2xl">{title}</h5>
         <h4 className="mb-4 font-bold text-stone-800 text-lg">{subtitle}</h4>
+        {preview && (
+          <p className="mb-4 text-sm text-stone-600 bg-stone-100 p-3 rounded">
+            {searchTerm
+              ? preview.split(new RegExp(`(${searchTerm})`, "i")).map((part, i) =>
+                  part.toLowerCase() === searchTerm.toLowerCase() ? (
+                    <span key={i} className="font-extrabold">{part}</span>
+                  ) : (
+                    part
+                  )
+                )
+              : preview}
+          </p>
+        )}
         {/* <p className="mb-3 text-lg text-stone-800" dangerouslySetInnerHTML={{
     __html: `${content.slice(0, 50)}${content.length === 50 ? "..." : ""}`}}></p> */}
       </div>
