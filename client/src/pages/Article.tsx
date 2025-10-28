@@ -103,7 +103,7 @@ export default function Article() {
       <img src="/assets/gradientBackground.png" alt="gradient background" className="absolute top-1 -z-1 opacity-25" />
       <Header />
       <div className="text-center mt-20 text-stone-600 mx-5">
-        <p className="text-green py-4 font-medium">Published on {moment(data.createdAt).format("MMMM Do, YYYY")}</p>
+        {/* <p className="text-green py-4 font-medium">Published on {moment(data.createdAt).format("MMMM Do, YYYY")}</p> */}
 
         <h1 className="text-3xl sm:text-5xl font-semibold max-w-2xl mx-auto text-stone-800">{data.title}</h1>
 
