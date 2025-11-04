@@ -28,7 +28,7 @@ export default function AboutUs() {
             </div>
           </div>
           <div className="max-w-2xl px-10 py-15 mx-auto flex flex-col items-center justify-center gap-5 text-center">
-            <img src="/jwl.png" alt="jwl logo" className="h-7" />
+            <img src="/justwiselove.png" alt="jwl logo" className="h-40" />
             <p className="italic text-stone-500 font-medium">“For the word of God is alive and exerts power and is sharper than any two-edged sword...” — Hebrews 4:12</p>
 
           </div>
